@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shuprama - Tiffin Service</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Calibri&display=swap');
+    body {
+      font-family: 'Calibri', sans-serif;
+      background-color: #fff700;
+      color: #b00000;
+      margin: 0;
+      padding: 0;
+      font-size: 18px;
+    }
+    header {
+      background: linear-gradient(to right, #f12711, #f5af19);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-family: Impact, sans-serif;
+    }
+    header img {
+      width: 160px;
+      margin: 10px auto;
+      display: block;
+    }
+    h1 {
+      margin: 10px 0;
+      font-size: 2.5em;
+    }
+    .section {
+      padding: 20px;
+      margin: 20px auto;
+      background: #ffffff;
+      border-radius: 15px;
+      max-width: 800px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .qr-img, .whatsapp-img {
+      display: block;
+      margin: 20px auto;
+      max-width: 250px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 15px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 16px;
+      background: #f5af19;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://i.ibb.co/NgzxL55T/logo-txt.png" alt="Shuprama Logo" />
+  <h1>Shuprama Tiffin Service</h1>
+</header>
+
+<div class="section" id="menu-section">
+  <h2>Today's Menu</h2>
+  <ul id="menu-list">
+    <li>Loading...</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>Order Now</h2>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfGSeKPuSacx2NQa_8zDjCSPtoer6l3YNVvbIH61azTswAk_Q/viewform?embedded=true"></iframe>
+</div>
+
+<div class="section">
+  <h2>Payment QR</h2>
+  <img class="qr-img" src="https://i.ibb.co/B5XzFwzH/payment-qr-txt-1.png" alt="QR Code" />
+</div>
+
+<div class="section">
+  <h2>Order by WhatsApp</h2>
+  <a href="https://wa.me/916387158928" target="_blank">
+    <img class="whatsapp-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+</div>
+
+<div class="section" style="text-align:center;">
+  <a href="thankyou.html" style="background-color:#b00000;color:white;padding:15px 25px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;margin-bottom:10px;">Thank You</a><br>
+  <a href="order-history.html" style="background-color:#b00000;color:white;padding:15px 25px;border-radius:8px;text-decoration:none;font-weight:bold;">Order History</a>
+</div>
+
+<footer>
+  © All rights reserved by Shuprama India
+</footer>
+
+<script>
+  const menu = {
+    Monday: {
+      Breakfast: "Poha + Chai + 4 Toast ₹40",
+      Lunch: "Mix veg pulao + dahi + salad ₹50",
+      Dinner: "Rajma/Chhole + 4 Roti + Chawal + Raita ₹50"
+    },
+    Tuesday: {
+      Breakfast: "Halwa + Chana + Chai ₹40",
+      Lunch: "Chane ki ghugni + 2 Paratha + Achar ₹50",
+      Dinner: "Arhar Daal + 4 Roti + Chawal + Sabji ₹50"
+    },
+    Wednesday: {
+      Breakfast: "Daliya + Fried Aloo + Chai ₹40",
+      Lunch: "Vegetable khichdi + Papad ₹50",
+      Dinner: "Soyabean + 4 Roti + Chawal + Raita ₹50"
+    },
+    Thursday: {
+      Breakfast: "Roti/Paratha + Sabji + Chai ₹40",
+      Lunch: "Soya chunks curry + 4 Roti + Salad ₹50",
+      Dinner: "Moong/Masoor + 4 Roti + Chawal + Sabji ₹50"
+    },
+    Friday: {
+      Breakfast: "Dosa + Chai + Tomato Sauce ₹40",
+      Lunch: "Besan ki Kadhi + 4 Roti + Chawal ₹50",
+      Dinner: "Malka Daal + 4 Roti + Chawal + Sabji ₹50"
+    },
+    Saturday: {
+      Breakfast: "Chhole + Kulche + Chai ₹40",
+      Lunch: "Lauki Chana Daal + 4 Roti + Achar ₹50",
+      Dinner: "Aloo Tamatar + 4 Roti + Chawal + Raita ₹50"
+    },
+    Sunday: {
+      Breakfast: "Kachauri + Chai ₹40",
+      Lunch: "Veg pulao + dahi + Salad ₹50",
+      Dinner: "Paneer + 4 Roti + Chawal + Raita ₹60"
+    }
+  };
+
+  const today = new Date().toLocaleString('en-US', { weekday: 'long' });
+  const todayMenu = menu[today];
+  const menuList = document.getElementById("menu-list");
+
+  if (todayMenu) {
+    menuList.innerHTML = `
+      <li><strong>Breakfast:</strong> ${todayMenu.Breakfast}</li>
+      <li><strong>Lunch:</strong> ${todayMenu.Lunch}</li>
+      <li><strong>Dinner:</strong> ${todayMenu.Dinner}</li>
+    `;
+  } else {
+    menuList.innerHTML = "<li>No menu available today.</li>";
+  }
+</script>
+
+</body>
+</html>
