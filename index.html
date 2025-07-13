@@ -92,6 +92,77 @@
 </head>
 <body>
 
+
+<!-- ☰ Hamburger menu -->
+<style>
+  #hamburger {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    color: #b00000;
+    background: #fff;
+    border-radius: 6px;
+    padding: 5px 10px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+  }
+  #sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+  }
+  #sidebar a, #sidebar .contact-box {
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #b00000;
+    display: block;
+    transition: 0.2s;
+  }
+  #sidebar a:hover {
+    background-color: #f0f0f0;
+  }
+  #sidebar .contact-box {
+    background: #fff0e0;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 1.6em;
+  }
+</style>
+
+<div id="hamburger" onclick="toggleSidebar()">☰</div>
+<div id="sidebar">
+  <a href="https://drive.google.com/file/d/10zu3FGCTuWtg_A8HD1n5n9t8LYKBLgaB/view?usp=drivesdk" target="_blank">📄 View Menu</a>
+  <a href="order-history.html">📦 Order History</a>
+  <div class="contact-box">
+    <strong>📍 Address:</strong><br>
+    Gully No.-7, Nakatiya, UP<br><br>
+    <strong>📞 Phone:</strong><br>
+    6387158928, 6393584048
+  </div>
+</div>
+
+<script>
+function toggleSidebar() {
+  var sidebar = document.getElementById("sidebar");
+  sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+}
+</script>
+
+
+
 <header>
   <img src="https://i.ibb.co/NgzxL55T/logo-txt.png" alt="Shuprama Logo" />
   <h1>Shuprama Tiffin Service</h1>
@@ -111,7 +182,7 @@
 
 <div class="section">
   <h2>Payment QR</h2>
-  <img class="qr-img" src="https://i.ibb.co/B5XzFwzH/payment-qr-txt-1.png" alt="QR Code" />
+  <a href="upi://pay?pa=prateekshukl388@naviaxis&pn=Shuprama%20Kitchen" target="_blank"><img class="qr-img" src="https://i.ibb.co/B5XzFwzH/payment-qr-txt-1.png" alt="QR Code" /></a>
 </div>
 
 <div class="section">
@@ -123,7 +194,7 @@
 
 <div class="section" style="text-align:center;">
   <a href="thankyou.html" style="background-color:#b00000;color:white;padding:15px 25px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;margin-bottom:10px;">Thank You</a><br>
-  <a href="order-history.html" style="background-color:#b00000;color:white;padding:15px 25px;border-radius:8px;text-decoration:none;font-weight:bold;">Order History</a>
+  
 </div>
 
 <footer>
