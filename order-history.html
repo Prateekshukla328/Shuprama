@@ -62,7 +62,7 @@
   <a class="back" href="dashboard.html">⬅ Back to Dashboard</a>
 
   <script>
-    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTREeBFZ9_ymc8XBCwv6EbH3Kpi3PU4cGvUZnOAfYqt_iHdYfa3rPAqBMo3cMu6CrnTDjWoEFn5lDb/pub?output=csv";
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2iwLBeozD8Ajx4XVPl_07jnyYY-IRu8qZMag1aO5AO-8G5d2eLIVjVYHtaMRBizq-fH8rtDgil4vi/pub?output=csv";
 
     const user = JSON.parse(localStorage.getItem("user"));
     const userEmail = user?.email || "";
@@ -84,9 +84,9 @@
 
           if (rowData["Email Address"] && userEmail === rowData["Email Address"]) {
             html += `<div class="order">
-              <div><strong>Date:</strong> ${rowData["Date"] || "N/A"}</div>
-              <div><strong>Meal:</strong> ${rowData["Meal"] || "N/A"}</div>
-              <div><strong>Status:</strong> ${rowData["Status"] || "Pending"}</div>
+              <div><strong>Special Instructions:</strong> ${rowData["Special Instructions"] || "N/A"}</div>
+              <div><strong>Delivery:</strong> ${rowData["delivery status"] || "N/A"}</div>
+              <div><strong>Payment:</strong> ${rowData["payment status"] || "N/A"}</div>
             </div>`;
           }
         });
