@@ -71,13 +71,16 @@
       .then(response => response.text())
       .then(data => {
         const rows = data.split("\n").map(r => r.split(","));
-        const headers = rows[0];
+        const rawHeaders = rows[0];
+        const headers = rawHeaders.map(h => h.trim().replace(/\r|\n/g, ""));
         const content = rows.slice(1);
         let html = "";
 
         content.forEach(row => {
           const rowData = {};
-          headers.forEach((h, i) => rowData[h.trim()] = row[i]?.trim());
+          headers.forEach((h, i) => {
+            rowData[h] = row[i]?.trim();
+          });
 
           if (rowData["Email Address"] && userEmail === rowData["Email Address"]) {
             html += `<div class="order">
