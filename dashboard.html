@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shuprama User Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fffbea;
+    }
+
+    .header {
+      background: #f44336;
+      color: white;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .menu-icon {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 56px;
+      left: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .menu a {
+      display: block;
+      padding: 12px 20px;
+      border-bottom: 1px solid #eee;
+      text-decoration: none;
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    .menu a:hover {
+      background: #ffe0b2;
+    }
+
+    .dashboard {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff3e0;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .dashboard h2 {
+      text-align: center;
+      color: #d84315;
+    }
+
+    .user-info {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+      font-size: 1.1em;
+      color: #4e342e;
+    }
+  </style>
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || (!user.email && !user.phone)) {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+
+  <div class="header">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div>Shuprama Kitchen</div>
+  </div>
+
+  <div class="menu" id="menu">
+    <a href="https://drive.google.com/file/d/10zu3FGCTuWtg_A8HD1n5n9t8LYKBLgaB/view?usp=drivesdk" target="_blank">📅 View Today’s Menu</a>
+    <a href="order-history.html">🛒 My Order History</a>
+    <a href="contact.html">📞 Contact Us</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+  </div>
+
+  <div class="dashboard">
+    <div class="user-info">Welcome, <span id="username"></span></div>
+    <h2>🧾 Your Dashboard</h2>
+    <p style="text-align:center; color:#5d4037;">
+      You can view today’s menu, your past orders and contact support directly from here.
+    </p>
+  </div>
+
+  <script>
+    const u = JSON.parse(localStorage.getItem("user"));
+    document.getElementById("username").innerText = u.email || u.phone;
+
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "login.html";
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+  </script>
+
+</body>
+</html>
