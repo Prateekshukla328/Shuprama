@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧪 Debug Order History - Shuprama</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #fff9c4;
+      padding: 20px;
+    }
+    .matched {
+      background-color: #c8e6c9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 5px solid green;
+    }
+    .not-matched {
+      background-color: #ffcdd2;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 5px solid red;
+    }
+  </style>
+</head>
+<body>
+  <h2>🧪 Debug Order Matching</h2>
+  <div id="emailInfo"></div>
+  <div id="debugOutput"></div>
+
+  <script>
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTREeBFZ9_ymc8XBCwv6EbH3Kpi3PU4cGvUZnOAfYqt_iHdYfa3rPAqBMo3cMu6CrnTDjWoEFn5lDb/pub?output=csv";
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userEmail = user?.email || "";
+    document.getElementById("emailInfo").innerText = "Logged in as: " + userEmail;
+
+    fetch(sheetURL)
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.split("\n").map(r => r.split(","));
+        const rawHeaders = rows[0];
+        const headers = rawHeaders.map(h => h.trim().replace(/\r|\n/g, ""));
+        const content = rows.slice(1);
+        let html = "";
+
+        content.forEach((row, index) => {
+          const rowData = {};
+          headers.forEach((h, i) => rowData[h] = row[i]?.trim());
+
+          const rowString = JSON.stringify(rowData, null, 2);
+          const isMatch = rowData["Email Address"] && rowData["Email Address"] === userEmail;
+
+          html += `<div class="${isMatch ? "matched" : "not-matched"}">
+            <strong>Row ${index + 2}:</strong><br><pre>${rowString}</pre>
+          </div>`;
+        });
+
+        document.getElementById("debugOutput").innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById("debugOutput").innerText = "Error loading sheet: " + err;
+      });
+  </script>
+</body>
+</html>
