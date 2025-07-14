@@ -1,19 +1,37 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Shuprama Login</title>
+
+  <!-- Firebase SDKs (compat versions for older support) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+  <!-- Firebase Config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDky00JFeTZ0pVTnLQ-LRE_0Om92ZtLJeo",
+      authDomain: "shuprama-tiffin-f6faf.firebaseapp.com",
+      databaseURL: "https://shuprama-tiffin-f6faf-default-rtdb.firebaseio.com",
+      projectId: "shuprama-tiffin-f6faf",
+      storageBucket: "shuprama-tiffin-f6faf.firebasestorage.app",
+      messagingSenderId: "513826845425",
+      appId: "1:513826845425:web:01119dda2684c74bd3af50",
+      measurementId: "G-ZT4Y0FH30W"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <style>
     body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
     .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
-    input, button { width: 100%; padding: 10px; margin-top: 10px; }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc; }
     .section { margin-top: 20px; }
     #otp-section { display: none; }
   </style>
 </head>
 <body>
+
   <div class="container">
     <h2>Login to Shuprama</h2>
 
@@ -26,11 +44,11 @@
       <button onclick="signupWithEmail()">Sign Up</button>
     </div>
 
-    <!-- Phone Login -->
+    <!-- Phone OTP Login -->
     <div class="section">
       <h3>Phone Login</h3>
       <input type="tel" id="phone" placeholder="+91XXXXXXXXXX" />
-      <div id="recaptcha-container"></div>
+      <div id="recaptcha-container" style="margin-top: 10px;"></div>
       <button onclick="sendOTP()">Send OTP</button>
 
       <div id="otp-section">
@@ -42,17 +60,6 @@
     <p id="message" style="color:green;"></p>
   </div>
 
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDky00JFeTZ0pVTnLQ-LRE_0Om92ZtTQnE",
-      authDomain: "shuprama-tiffin-f6faf.firebaseapp.com",
-      projectId: "shuprama-tiffin-f6faf",
-      storageBucket: "shuprama-tiffin-f6faf.appspot.com",
-      messagingSenderId: "14127757897",
-      appId: "1:14127757897:web:7f5a3f595f6cd9cbb0fd80"
-    };
-    firebase.initializeApp(firebaseConfig);
-  </script>
   <script src="firebase-login.js"></script>
 </body>
 </html>
