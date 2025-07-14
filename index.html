@@ -4,6 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Shuprama - Tiffin Service</title>
+<!-- ✅ Login Check Script -->
+<script>
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user || (!user.phone && !user.email)) {
+    window.location.href = "login.html";
+  }
+</script>
+
   <!-- ✅ SEO meta tags added for Google Search optimization -->
   <!-- ✅ SEO META TAGS START -->
 <meta name="description" content="Shuprama provides affordable, hygienic, and student-friendly tiffin services in Bareilly.">
