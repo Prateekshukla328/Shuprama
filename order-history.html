@@ -1,15 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Order History - Shuprama</title>
+
+  <!-- ✅ Login Check Script -->
   <script>
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user || (!user.phone && !user.email)) {
-    window.location.href = "login.html";
-  }
-</script>
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || (!user.phone && !user.email)) {
+      window.location.href = "login.html";
+    }
+  </script>
 
   <style>
     body {
@@ -19,10 +20,12 @@
       margin: 0;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
       color: #b00000;
     }
+
     .order-list {
       max-width: 800px;
       margin: auto;
@@ -31,63 +34,33 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
+
     .order {
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
     }
+
     .order:last-child {
       border-bottom: none;
     }
-    .order strong {
-      display: inline-block;
-      min-width: 100px;
-    }
   </style>
 </head>
+
 <body>
   <h1>Order History</h1>
-  <div class="order-list" id="orderList">
-    Loading...
+
+  <div class="order-list">
+    <div class="order">
+      <strong>Order #1</strong><br>
+      Date: 2025-07-13<br>
+      Items: Rajma, Rice, Salad<br>
+    </div>
+    <div class="order">
+      <strong>Order #2</strong><br>
+      Date: 2025-07-14<br>
+      Items: Paneer, Roti, Raita<br>
+    </div>
+    <!-- Add more orders dynamically in future -->
   </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MSG_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    const orderList = document.getElementById("orderList");
-    async function loadOrders() {
-      const q = query(collection(db, "orders"), orderBy("timestamp", "desc"));
-      const querySnapshot = await getDocs(q);
-      let html = "";
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        html += `
-          <div class="order">
-            <div><strong>Name:</strong> ${data.name || "N/A"}</div>
-            <div><strong>Meal:</strong> ${data.meal || "N/A"}</div>
-            <div><strong>Details:</strong> ${data.details || "N/A"}</div>
-            <div><strong>Time:</strong> ${data.timestamp?.toDate?.().toLocaleString?.() || "N/A"}</div>
-          </div>
-        `;
-      });
-
-      orderList.innerHTML = html || "No orders found.";
-    }
-
-    loadOrders();
-  </script>
 </body>
 </html>
