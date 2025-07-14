@@ -4,6 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Order History - Shuprama</title>
+  <script>
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user || (!user.phone && !user.email)) {
+    window.location.href = "login.html";
+  }
+</script>
+
   <style>
     body {
       font-family: 'Calibri', sans-serif;
