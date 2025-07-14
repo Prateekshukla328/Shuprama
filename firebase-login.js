@@ -1,4 +1,3 @@
-
 const auth = firebase.auth();
 
 // Email login
@@ -9,6 +8,7 @@ function loginWithEmail() {
     .then(() => {
       document.getElementById("message").innerText = "Logged in successfully!";
       saveSession();
+      window.location.href = "index.html"; // ✅ Redirect to homepage
     })
     .catch(error => alert("Login Error: " + error.message));
 }
@@ -21,6 +21,7 @@ function signupWithEmail() {
     .then(() => {
       document.getElementById("message").innerText = "Account created!";
       saveSession();
+      window.location.href = "index.html"; // ✅ Redirect to homepage
     })
     .catch(error => alert("Signup Error: " + error.message));
 }
@@ -47,6 +48,7 @@ function verifyOTP() {
       .then(() => {
         document.getElementById("message").innerText = "Phone login successful!";
         saveSession();
+        window.location.href = "index.html"; // ✅ Redirect to homepage
       })
       .catch(error => alert("OTP Verification Failed: " + error.message));
   }
@@ -55,6 +57,10 @@ function verifyOTP() {
 function saveSession() {
   const user = auth.currentUser;
   if (user) {
-    localStorage.setItem("user", JSON.stringify({ uid: user.uid, email: user.email || '', phone: user.phoneNumber || '' }));
+    localStorage.setItem("user", JSON.stringify({
+      uid: user.uid,
+      email: user.email || '',
+      phone: user.phoneNumber || ''
+    }));
   }
 }
