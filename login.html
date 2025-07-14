@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shuprama Login</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <style>
+    body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+    .container { max-width: 400px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
+    input, button { width: 100%; padding: 10px; margin-top: 10px; }
+    .section { margin-top: 20px; }
+    #otp-section { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login to Shuprama</h2>
+
+    <!-- Email Login -->
+    <div class="section">
+      <h3>Email Login</h3>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="loginWithEmail()">Login</button>
+      <button onclick="signupWithEmail()">Sign Up</button>
+    </div>
+
+    <!-- Phone Login -->
+    <div class="section">
+      <h3>Phone Login</h3>
+      <input type="tel" id="phone" placeholder="+91XXXXXXXXXX" />
+      <div id="recaptcha-container"></div>
+      <button onclick="sendOTP()">Send OTP</button>
+
+      <div id="otp-section">
+        <input type="text" id="otp" placeholder="Enter OTP" />
+        <button onclick="verifyOTP()">Verify OTP</button>
+      </div>
+    </div>
+
+    <p id="message" style="color:green;"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDky00JFeTZ0pVTnLQ-LRE_0Om92ZtTQnE",
+      authDomain: "shuprama-tiffin-f6faf.firebaseapp.com",
+      projectId: "shuprama-tiffin-f6faf",
+      storageBucket: "shuprama-tiffin-f6faf.appspot.com",
+      messagingSenderId: "14127757897",
+      appId: "1:14127757897:web:7f5a3f595f6cd9cbb0fd80"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="firebase-login.js"></script>
+</body>
+</html>
