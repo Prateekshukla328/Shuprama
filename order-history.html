@@ -82,7 +82,7 @@
 
           if (
             (rowData["Phone"] && userPhone.endsWith(rowData["Phone"])) ||
-            (rowData["Email"] && userEmail === rowData["Email"])
+            (rowData["Email Address"] && userEmail === rowData["Email Address"])
           ) {
             html += `<div class="order">
               <div><strong>Date:</strong> ${rowData["Date"] || "N/A"}</div>
