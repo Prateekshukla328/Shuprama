@@ -80,7 +80,10 @@
           const rowData = {};
           headers.forEach((h, i) => rowData[h.trim()] = row[i]?.trim());
 
-          if (rowData["Phone"] === userPhone || rowData["Email"] === userEmail) {
+          if (
+            (rowData["Phone"] && userPhone.endsWith(rowData["Phone"])) ||
+            (rowData["Email"] && userEmail === rowData["Email"])
+          ) {
             html += `<div class="order">
               <div><strong>Date:</strong> ${rowData["Date"] || "N/A"}</div>
               <div><strong>Meal:</strong> ${rowData["Meal"] || "N/A"}</div>
