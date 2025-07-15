@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧪 Order History Debug v2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #fff8e1;
+      padding: 20px;
+    }
+    h2 {
+      color: #e65100;
+    }
+    .match {
+      background-color: #c8e6c9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 4px solid green;
+    }
+    .no-match {
+      background-color: #ffcdd2;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-left: 4px solid red;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🧪 Order History Debug v2</h2>
+  <p><strong>Login Email:</strong> <span id="loginEmail">Loading...</span></p>
+  <div id="output">Checking orders...</div>
+
+  <script>
+    const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2iwLBeozD8Ajx4XVPl_07jnyYY-IRu8qZMag1aO5AO-8G5d2eLIVjVYHtaMRBizq-fH8rtDgil4vi/pub?output=csv";
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userEmail = user?.email || "Not found";
+    document.getElementById("loginEmail").innerText = userEmail;
+
+    fetch(sheetURL)
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.split("\n").map(r => r.split(","));
+        const headers = rows[0].map(h => h.trim().replace(/\r|\n/g, ""));
+        const content = rows.slice(1);
+        let html = "";
+
+        let found = false;
+
+        content.forEach((row, idx) => {
+          const rowData = {};
+          headers.forEach((h, i) => rowData[h] = row[i]?.trim());
+
+          const match = rowData["Email Address"] === userEmail;
+
+          html += `<div class="${match ? 'match' : 'no-match'}">
+            <div><strong>Row ${idx + 2}</strong></div>
+            <div>Email: <span class="highlight">${rowData["Email Address"] || "N/A"}</span></div>
+            <div>Meal: ${rowData["Meal"] || "N/A"}</div>
+            <div>Status: ${rowData["Status"] || "N/A"}</div>
+          </div>`;
+
+          if (match) found = true;
+        });
+
+        document.getElementById("output").innerHTML = found ? html : "<p class='no-match'>❌ No matching orders found for your email.</p>";
+      })
+      .catch(err => {
+        document.getElementById("output").innerHTML = "<p style='color:red;'>⚠️ Failed to load sheet data.</p>";
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>
