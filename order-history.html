@@ -65,38 +65,45 @@
     const user = JSON.parse(localStorage.getItem("user"));
     const userEmail = user?.email?.trim().toLowerCase() || "not found";
 
-    function parseCSV(text) {
+    function parseCSV(csvText) {
+      const lines = csvText.split(/\r\n|\n/);
       const rows = [];
-      let row = [];
-      let cell = '';
-      let inQuotes = false;
+      let insideQuote = false;
+      let currentRow = [];
+      let currentCell = "";
 
-      for (let i = 0; i < text.length; i++) {
-        const char = text[i];
-        const next = text[i + 1];
+      for (let line of lines) {
+        let i = 0;
+        while (i < line.length) {
+          const char = line[i];
 
-        if (char === '"' && inQuotes && next === '"') {
-          cell += '"';
-          i++;
-        } else if (char === '"') {
-          inQuotes = !inQuotes;
-        } else if (char === ',' && !inQuotes) {
-          row.push(cell);
-          cell = '';
-        } else if ((char === '\n' || char === '\r') && !inQuotes) {
-          if (cell || cell === '') {
-            row.push(cell);
-            cell = '';
+          if (char === '"') {
+            if (insideQuote && line[i + 1] === '"') {
+              currentCell += '"';
+              i += 2;
+            } else {
+              insideQuote = !insideQuote;
+              i++;
+            }
+          } else if (char === ',' && !insideQuote) {
+            currentRow.push(currentCell);
+            currentCell = "";
+            i++;
+          } else {
+            currentCell += char;
+            i++;
           }
-          if (row.length > 1) rows.push(row);
-          row = [];
+        }
+
+        if (!insideQuote) {
+          currentRow.push(currentCell);
+          rows.push(currentRow);
+          currentRow = [];
+          currentCell = "";
         } else {
-          cell += char;
+          currentCell += '\n'; // Handle multiline cell
         }
       }
-
-      if (cell) row.push(cell);
-      if (row.length > 1) rows.push(row);
 
       return rows;
     }
@@ -111,7 +118,7 @@
         let serial = 1;
 
         content.forEach(row => {
-          const email = row[6]?.trim().toLowerCase(); // Column G = Email
+          const email = row[6]?.trim().toLowerCase();
           if (email === userEmail) {
             found = true;
             html += `
