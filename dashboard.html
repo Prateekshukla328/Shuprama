@@ -10,6 +10,7 @@
       font-family: 'Segoe UI', Tahoma, sans-serif;
       background: #fff8dc;
     }
+
     header {
       background-color: #e53935;
       color: white;
@@ -17,25 +18,47 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
     }
+
     header h2 {
       margin: 0;
     }
+
+    .hamburger {
+      cursor: pointer;
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 4px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
     .sidebar {
       position: fixed;
-      left: 0;
       top: 0;
+      left: 0;
+      width: 250px;
       height: 100%;
-      width: 220px;
       background-color: #fbc02d;
-      padding-top: 60px;
       transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: 100;
+      transition: transform 0.4s ease;
+      padding-top: 70px;
+      z-index: 1000;
     }
+
     .sidebar.show {
       transform: translateX(0);
     }
+
     .sidebar a {
       display: block;
       padding: 15px 20px;
@@ -43,70 +66,76 @@
       text-decoration: none;
       font-weight: bold;
     }
+
     .sidebar a:hover {
       background-color: #fff9c4;
     }
-    #menu-toggle {
-      font-size: 24px;
-      cursor: pointer;
-    }
-    .top-right {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-    .btn {
-      background-color: #fff;
-      color: #e53935;
-      padding: 6px 12px;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-    }
+
     .container {
       padding: 20px;
+    }
+
+    /* Optional: background overlay when menu is open */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.4);
+      z-index: 999;
+      display: none;
+    }
+
+    .overlay.show {
+      display: block;
     }
   </style>
 </head>
 <body>
 
+  <div class="overlay" id="overlay"></div>
+
   <header>
-    <div id="menu-toggle">☰</div>
-    <h2>Shuprama Kitchen</h2>
-    <div class="top-right">
-      <span id="user-name">Welcome</span>
-      <a href="index.html" class="btn">🏠 Home</a>
-      <button onclick="logout()" class="btn">Logout</button>
+    <div class="hamburger" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+    <h2>Shuprama Kitchen</h2>
   </header>
 
   <div class="sidebar" id="sidebar">
     <a href="menu.pdf" target="_blank">📄 View Menu</a>
     <a href="order-history.html">📜 Order History</a>
     <a href="https://g.co/kgs/giuizwx" target="_blank">📍 Contact Us</a>
+    <a href="index.html">🏠 Go to Home</a>
+    <a href="#" onclick="logout()">🔓 Logout</a>
   </div>
 
   <div class="container">
-    <h3>Your Dashboard</h3>
-    <p>Use the menu (☰) to view options like order history, contact, and more.</p>
+    <h3>Welcome to Your Dashboard</h3>
+    <p>You can manage your tiffin orders, view history, and contact us from the menu.</p>
   </div>
 
   <script>
-    document.getElementById("menu-toggle").addEventListener("click", () => {
-      document.getElementById("sidebar").classList.toggle("show");
+    const menuToggle = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+
+    menuToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("show");
+      overlay.classList.toggle("show");
+    });
+
+    overlay.addEventListener("click", () => {
+      sidebar.classList.remove("show");
+      overlay.classList.remove("show");
     });
 
     function logout() {
       localStorage.removeItem("user");
       window.location.href = "login.html";
-    }
-
-    // Display logged-in user
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user?.email || user?.phone) {
-      document.getElementById("user-name").textContent = "Welcome, " + (user.email || user.phone);
     }
   </script>
 
