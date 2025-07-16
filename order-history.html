@@ -30,7 +30,7 @@
     }
     .order-box strong {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .back-link {
       color: #d32f2f;
@@ -65,23 +65,59 @@
     const user = JSON.parse(localStorage.getItem("user"));
     const userEmail = user?.email?.trim().toLowerCase() || "not found";
 
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let cell = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"' && inQuotes && next === '"') {
+          cell += '"';
+          i++;
+        } else if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          row.push(cell);
+          cell = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (cell || cell === '') {
+            row.push(cell);
+            cell = '';
+          }
+          if (row.length > 1) rows.push(row);
+          row = [];
+        } else {
+          cell += char;
+        }
+      }
+
+      if (cell) row.push(cell);
+      if (row.length > 1) rows.push(row);
+
+      return rows;
+    }
+
     fetch(sheetURL)
       .then(res => res.text())
       .then(csv => {
-        const rows = csv.trim().split("\n").map(r => r.split(","));
+        const rows = parseCSV(csv);
         const content = rows.slice(1);
         let found = false;
         let html = "";
         let serial = 1;
 
         content.forEach(row => {
-          const email = row[6]?.trim().toLowerCase(); // ✅ Column G = Email = index 6
+          const email = row[6]?.trim().toLowerCase(); // Column G = Email
           if (email === userEmail) {
             found = true;
             html += `
               <div class="order-box">
                 <div class="serial">Sr. No. ${serial++}</div>
-                <strong>Timestamp:</strong> ${row[0] || "N/A"}
+                <strong>Email:</strong> ${email}
                 <strong>Name:</strong> ${row[1] || "N/A"}
                 <strong>Phone Number:</strong> ${row[2] || "N/A"}
                 <strong>Date of Order:</strong> ${row[3] || "N/A"}
