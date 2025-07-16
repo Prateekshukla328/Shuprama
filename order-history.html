@@ -76,9 +76,10 @@
         let i = 0;
         while (i < line.length) {
           const char = line[i];
+          const next = line[i + 1];
 
           if (char === '"') {
-            if (insideQuote && line[i + 1] === '"') {
+            if (insideQuote && next === '"') {
               currentCell += '"';
               i += 2;
             } else {
@@ -101,7 +102,7 @@
           currentRow = [];
           currentCell = "";
         } else {
-          currentCell += '\n'; // Handle multiline cell
+          currentCell += '\n';
         }
       }
 
@@ -124,6 +125,7 @@
             html += `
               <div class="order-box">
                 <div class="serial">Sr. No. ${serial++}</div>
+                <strong>Timestamp:</strong> ${row[0] || "N/A"}
                 <strong>Email:</strong> ${email}
                 <strong>Name:</strong> ${row[1] || "N/A"}
                 <strong>Phone Number:</strong> ${row[2] || "N/A"}
