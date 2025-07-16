@@ -10,7 +10,6 @@
       font-family: 'Segoe UI', Tahoma, sans-serif;
       background: #fff8dc;
     }
-
     header {
       background-color: #e53935;
       color: white;
@@ -20,11 +19,9 @@
       align-items: center;
       position: relative;
     }
-
     header h2 {
       margin: 0;
     }
-
     .hamburger {
       cursor: pointer;
       width: 30px;
@@ -33,7 +30,6 @@
       flex-direction: column;
       justify-content: space-between;
     }
-
     .hamburger span {
       display: block;
       height: 4px;
@@ -41,7 +37,6 @@
       border-radius: 2px;
       transition: 0.3s;
     }
-
     .sidebar {
       position: fixed;
       top: 0;
@@ -54,11 +49,9 @@
       padding-top: 70px;
       z-index: 1000;
     }
-
     .sidebar.show {
       transform: translateX(0);
     }
-
     .sidebar a {
       display: block;
       padding: 15px 20px;
@@ -66,16 +59,12 @@
       text-decoration: none;
       font-weight: bold;
     }
-
     .sidebar a:hover {
       background-color: #fff9c4;
     }
-
     .container {
       padding: 20px;
     }
-
-    /* Optional: background overlay when menu is open */
     .overlay {
       position: fixed;
       top: 0;
@@ -86,9 +75,18 @@
       z-index: 999;
       display: none;
     }
-
     .overlay.show {
       display: block;
+    }
+    .ad-box {
+      margin-top: 25px;
+      background-color: #ffe082;
+      border-left: 5px solid #ff6f00;
+      padding: 15px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #4e342e;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -106,7 +104,7 @@
   </header>
 
   <div class="sidebar" id="sidebar">
-    <a href="menu.pdf" target="_blank">📄 View Menu</a>
+    <a href="https://drive.google.com/file/d/10zu3FGCTuWtg_A8HD1n5n9t8LYKBLgaB/view?usp=drivesdk" target="_blank">📄 View Menu</a>
     <a href="order-history.html">📜 Order History</a>
     <a href="https://g.co/kgs/giuizwx" target="_blank">📍 Contact Us</a>
     <a href="index.html">🏠 Go to Home</a>
@@ -114,8 +112,13 @@
   </div>
 
   <div class="container">
-    <h3>Welcome to Your Dashboard</h3>
-    <p>You can manage your tiffin orders, view history, and contact us from the menu.</p>
+    <h3 id="user-name">Welcome</h3>
+
+    <div class="ad-box">
+      🍱 <strong>Shuprama Kitchen</strong> — Ghar jaisa khana, har din!  
+      <br>📍 Based in Nakatiya, Bareilly — Trusted by families, loved by students.
+      <br>🔔 Daily tiffins, hygienic meals, and quick delivery at your doorstep.
+    </div>
   </div>
 
   <script>
@@ -136,6 +139,13 @@
     function logout() {
       localStorage.removeItem("user");
       window.location.href = "login.html";
+    }
+
+    // Display user name + email
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user?.email || user?.phone) {
+      const name = user.email?.split('@')[0] || user.phone;
+      document.getElementById("user-name").innerHTML = `👋 Welcome, <strong>${name}</strong><br>📧 ${user.email || user.phone}`;
     }
   </script>
 
