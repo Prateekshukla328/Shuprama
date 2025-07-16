@@ -1,79 +1,95 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>✅ Order History - Shuprama</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Order History</title>
   <style>
     body {
-      font-family: monospace;
-      background-color: #fffde7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff8dc;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #e53935;
+      color: white;
+      padding: 16px;
+      text-align: center;
+      font-size: 24px;
+    }
+    .container {
       padding: 20px;
     }
-    h2 {
-      color: #ff6f00;
+    .order-box {
+      background-color: #fff3e0;
+      border: 1px solid #fbc02d;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 15px;
     }
-    .order {
-      background-color: #e0f7fa;
-      border-left: 4px solid #00acc1;
-      padding: 10px;
-      margin-bottom: 10px;
+    .order-box strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+    .back-link {
+      color: #d32f2f;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      font-weight: bold;
     }
     .no-orders {
+      padding: 20px;
       background-color: #ffcdd2;
-      padding: 15px;
-      border-left: 4px solid red;
-    }
-    .highlight {
+      border-left: 5px solid red;
       font-weight: bold;
-      color: #d84315;
     }
   </style>
 </head>
 <body>
-
-  <h2>✅ Order History</h2>
-  <p><strong>Login Email:</strong> <span id="loginEmail">Loading...</span></p>
-  <div id="output">Checking orders...</div>
+  <header>🛒 My Order History</header>
+  <div class="container">
+    <div id="output">Loading orders...</div>
+    <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+  </div>
 
   <script>
     const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2iwLBeozD8Ajx4XVPl_07jnyYY-IRu8qZMag1aO5AO-8G5d2eLIVjVYHtaMRBizq-fH8rtDgil4vi/pub?output=csv";
-
     const user = JSON.parse(localStorage.getItem("user"));
     const userEmail = user?.email?.trim().toLowerCase() || "not found";
-    document.getElementById("loginEmail").innerText = userEmail;
 
     fetch(sheetURL)
       .then(res => res.text())
       .then(csv => {
-        const rows = csv.trim().split("\\n").map(row => row.split(","));
+        const rows = csv.trim().split("\n").map(r => r.split(","));
         const content = rows.slice(1);
-        let matchFound = false;
+        let found = false;
         let html = "";
 
-        content.forEach((row, idx) => {
-          const email = row[6]?.trim().toLowerCase(); // Column G
+        content.forEach(row => {
+          const email = row[6]?.trim().toLowerCase();  // Column G (index 6)
           if (email === userEmail) {
-            matchFound = true;
-            html += `<div class="order">
-              <div><strong>Row ${idx + 2}</strong></div>
-              <div>Email: <span class="highlight">${email}</span></div>
-              <div>Meal: ${row[3] || "N/A"}</div>
-              <div>Instructions: ${row[4] || "N/A"}</div>
-              <div>Date: ${row[2] || "N/A"}</div>
-            </div>`;
+            found = true;
+            html += `
+              <div class="order-box">
+                <strong>Special Instructions:</strong> ${row[4] || "N/A"}
+                <strong>Delivery:</strong> ${row[7] || "N/A"}
+                <strong>Payment:</strong> ${row[8] || "N/A"}
+              </div>
+            `;
           }
         });
 
-        document.getElementById("output").innerHTML = matchFound
+        document.getElementById("output").innerHTML = found
           ? html
-          : "<div class='no-orders'>❌ No matching orders found for your email in Column G.</div>";
+          : '<div class="no-orders">❌ No matching orders found for your email.</div>';
       })
       .catch(err => {
-        document.getElementById("output").innerHTML = "<div style='color:red;'>⚠️ Failed to load Google Sheet.</div>";
+        document.getElementById("output").innerHTML = "<div class='no-orders'>⚠️ Failed to load data.</div>";
         console.error(err);
       });
   </script>
-
 </body>
 </html>
