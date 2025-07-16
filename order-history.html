@@ -68,25 +68,28 @@
     fetch(sheetURL)
       .then(res => res.text())
       .then(csv => {
-        const rows = csv.trim().split("\\n").map(r => r.split(","));
+        const rows = csv.trim().split("\n").map(r => r.split(","));
         const content = rows.slice(1);
         let found = false;
         let html = "";
         let serial = 1;
 
         content.forEach(row => {
-          const email = row[6]?.trim().toLowerCase(); // Column G = Email
+          const email = row[6]?.trim().toLowerCase(); // ✅ Column G = Email = index 6
           if (email === userEmail) {
             found = true;
             html += `
               <div class="order-box">
                 <div class="serial">Sr. No. ${serial++}</div>
-                <strong>Date & Time:</strong> ${row[0] || "N/A"}
-                <strong>Tiffin Type:</strong> ${row[3] || "N/A"}
-                <strong>Special Instructions:</strong> ${row[4] || "N/A"}
-                <strong>Address:</strong> ${row[5] || "N/A"}
-                <strong>Delivery Status:</strong> ${row[7] === "TRUE" ? "✅ Delivered" : "⏳ Pending"}
-                <strong>Payment Status:</strong> ${row[8] === "TRUE" ? "✅ Paid" : "❌ Not Paid"}
+                <strong>Timestamp:</strong> ${row[0] || "N/A"}
+                <strong>Name:</strong> ${row[1] || "N/A"}
+                <strong>Phone Number:</strong> ${row[2] || "N/A"}
+                <strong>Date of Order:</strong> ${row[3] || "N/A"}
+                <strong>Tiffin Type:</strong> ${row[4] || "N/A"}
+                <strong>Special Instructions:</strong> ${row[5] || "N/A"}
+                <strong>Address:</strong> ${row[7] || "N/A"}
+                <strong>Delivery Status:</strong> ${row[9] === "TRUE" ? "✅ Delivered" : "⏳ Pending"}
+                <strong>Payment Status:</strong> ${row[10] === "TRUE" ? "✅ Paid" : "❌ Not Paid"}
               </div>
             `;
           }
