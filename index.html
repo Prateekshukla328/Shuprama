@@ -971,123 +971,6 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
-    /* Order History Modal */
-    .order-history-modal {
-      display: none;
-      position: fixed;
-      z-index: 2000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(5px);
-    }
-
-    .order-history-content {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      margin: 5% auto;
-      padding: 30px;
-      border-radius: 25px;
-      width: 90%;
-      max-width: 800px;
-      max-height: 80vh;
-      overflow-y: auto;
-      position: relative;
-      color: white;
-    }
-
-    .order-item {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 15px;
-      margin: 15px 0;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    /* Admin Panel Styles */
-    .admin-modal {
-      display: none;
-      position: fixed;
-      z-index: 3000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      backdrop-filter: blur(10px);
-    }
-
-    .admin-content {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      margin: 2% auto;
-      padding: 30px;
-      border-radius: 25px;
-      width: 95%;
-      max-width: 1000px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      color: white;
-    }
-
-    .admin-section {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 25px;
-      border-radius: 15px;
-      margin: 20px 0;
-      backdrop-filter: blur(10px);
-    }
-
-    .admin-btn {
-      background: linear-gradient(135deg, #00b894, #00cec9);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      margin: 5px;
-      width: 100%;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .admin-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .admin-btn.danger {
-      background: linear-gradient(135deg, #ff6b6b, #e84393);
-    }
-
-    .admin-btn.warning {
-      background: linear-gradient(135deg, #fdcb6e, #e17055);
-    }
-
-    .admin-btn.info {
-      background: linear-gradient(135deg, #74b9ff, #0984e3);
-    }
-
-    .admin-btn.purple {
-      background: linear-gradient(135deg, #a29bfe, #6c5ce7);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 25px;
-      color: white;
-      font-size: 35px;
-      font-weight: bold;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .close-modal:hover {
-      color: #feca57;
-    }
 
   </style>
 </head>
@@ -1139,6 +1022,22 @@
     <a href="javascript:void(0)" onclick="logout()">
       <span class="menu-icon">🚪</span>Logout
     </a>
+    
+    <div class="contact-box" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); border-radius: 20px; margin: 20px 15px; padding: 25px; color: white; backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="font-size: 2em; margin-bottom: 10px;">👑</div>
+        <strong style="font-size: 1.2em; color: #feca57;">Admin Access</strong>
+      </div>
+      <div style="background: rgba(254, 202, 87, 0.2); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+        <strong>🔐 Admin Login:</strong><br>
+        <span style="opacity: 0.9;">User ID: PrateekShuprama890<br>Password: Pradhya677@</span>
+      </div>
+      <div style="text-align: center;">
+        <button onclick="adminQuickLogin()" style="background: linear-gradient(135deg, #feca57, #ff6b6b); color: white; border: none; padding: 12px 25px; border-radius: 20px; cursor: pointer; font-weight: 600; width: 100%;">
+          👑 Quick Admin Login
+        </button>
+      </div>
+    </div>
     
     <div class="contact-box" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); border-radius: 20px; margin: 20px 15px; padding: 25px; color: white; backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);">
       <div style="text-align: center; margin-bottom: 20px;">
@@ -1343,6 +1242,8 @@
     </p>
   </div>
 
+
+
   <!-- Thank You Section -->
   <div class="section" style="text-align: center; background: linear-gradient(135deg, #00b894, #00cec9);">
     <a href="thankyou.html" style="background: rgba(255,255,255,0.2); color: white; padding: 20px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 15px; backdrop-filter: blur(10px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'">
@@ -1406,9 +1307,9 @@
   </div>
 
   <!-- Order History Modal -->
-  <div id="orderHistoryModal" class="order-history-modal">
-    <div class="order-history-content">
-      <span class="close-modal" onclick="closeOrderHistory()">&times;</span>
+  <div id="orderHistoryModal" style="display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
+    <div style="background: linear-gradient(135deg, #667eea, #764ba2); margin: 5% auto; padding: 30px; border-radius: 25px; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto; position: relative;">
+      <span onclick="closeOrderHistory()" style="color: white; float: right; font-size: 35px; font-weight: bold; cursor: pointer; line-height: 1;">&times;</span>
       <h2 style="color: white; text-align: center; margin-bottom: 30px; font-size: 2.2em;">📦 Your Order History</h2>
       <div id="orderHistoryContent">
         <p style="color: white; text-align: center; font-size: 1.2em;">Loading your orders...</p>
@@ -1429,7 +1330,7 @@
       
       <!-- Login Form -->
       <div id="loginForm" class="login-form">
-        <input type="text" id="loginPhone" class="login-input" placeholder="📱 Phone Number or 🆔 Admin Username" required>
+        <input type="tel" id="loginPhone" class="login-input" placeholder="📱 Enter your phone number" required>
         <input type="password" id="loginPassword" class="login-input" placeholder="🔒 Enter your password" required>
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0;">
@@ -1483,43 +1384,43 @@
   </div>
 
   <!-- Admin Panel Modal -->
-  <div id="adminModal" class="admin-modal">
-    <div class="admin-content">
-      <span class="close-modal" onclick="closeAdminPanel()">&times;</span>
+  <div id="adminModal" style="display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);">
+    <div style="background: linear-gradient(135deg, #667eea, #764ba2); margin: 2% auto; padding: 30px; border-radius: 25px; width: 95%; max-width: 1000px; max-height: 90vh; overflow-y: auto; position: relative; color: white;">
+      <span onclick="closeAdminPanel()" style="color: white; float: right; font-size: 35px; font-weight: bold; cursor: pointer; line-height: 1;">&times;</span>
       <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.2em;">⚙️ Admin Panel</h2>
       
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
         
         <!-- User Management -->
-        <div class="admin-section">
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
           <h3 style="margin-bottom: 20px; color: #feca57;">👥 User Management</h3>
-          <button onclick="showAllUsersDetailed()" class="admin-btn">
+          <button onclick="showAllUsersDetailed()" style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             📊 View All Users
           </button>
-          <button onclick="exportUserData()" class="admin-btn info">
+          <button onclick="exportUserData()" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             📥 Export User Data
           </button>
-          <button onclick="clearAllUsers()" class="admin-btn danger">
+          <button onclick="clearAllUsers()" style="background: linear-gradient(135deg, #ff6b6b, #e84393); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             🗑️ Clear All Users
           </button>
         </div>
 
         <!-- Order Management -->
-        <div class="admin-section">
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
           <h3 style="margin-bottom: 20px; color: #feca57;">📦 Order Management</h3>
-          <button onclick="showAllOrders()" class="admin-btn">
+          <button onclick="showAllOrders()" style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             📋 View All Orders
           </button>
-          <button onclick="exportOrderData()" class="admin-btn info">
+          <button onclick="exportOrderData()" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             📥 Export Orders
           </button>
-          <button onclick="clearAllOrders()" class="admin-btn danger">
+          <button onclick="clearAllOrders()" style="background: linear-gradient(135deg, #ff6b6b, #e84393); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             🗑️ Clear All Orders
           </button>
         </div>
 
         <!-- System Stats -->
-        <div class="admin-section">
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
           <h3 style="margin-bottom: 20px; color: #feca57;">📊 System Statistics</h3>
           <div id="systemStats">
             <p>Loading statistics...</p>
@@ -1527,32 +1428,32 @@
         </div>
 
         <!-- Admin Management -->
-        <div class="admin-section">
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
           <h3 style="margin-bottom: 20px; color: #feca57;">👑 Admin Management</h3>
-          <button onclick="addNewAdmin()" class="admin-btn">
+          <button onclick="addNewAdmin()" style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             ➕ Add New Admin
           </button>
-          <button onclick="removeAdmin()" class="admin-btn danger">
+          <button onclick="removeAdmin()" style="background: linear-gradient(135deg, #ff6b6b, #e84393); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             ➖ Remove Admin
           </button>
-          <button onclick="changeAdminPassword()" class="admin-btn warning">
+          <button onclick="changeAdminPassword()" style="background: linear-gradient(135deg, #fdcb6e, #e17055); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             🔑 Change Admin Password
           </button>
-          <button onclick="viewAllAdmins()" class="admin-btn info">
+          <button onclick="viewAllAdmins()" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             👥 View All Admins
           </button>
         </div>
 
         <!-- Quick Actions -->
-        <div class="admin-section">
+        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
           <h3 style="margin-bottom: 20px; color: #feca57;">⚡ Quick Actions</h3>
-          <button onclick="createTestUser()" class="admin-btn warning">
+          <button onclick="createTestUser()" style="background: linear-gradient(135deg, #fdcb6e, #e17055); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             👤 Create Test User
           </button>
-          <button onclick="resetSystem()" class="admin-btn danger">
+          <button onclick="resetSystem()" style="background: linear-gradient(135deg, #ff6b6b, #e84393); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             🔄 Reset System
           </button>
-          <button onclick="backupData()" class="admin-btn purple">
+          <button onclick="backupData()" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; margin: 5px; width: 100%; font-weight: 600;">
             💾 Backup Data
           </button>
         </div>
@@ -1568,55 +1469,6 @@
   </footer>
 
   <script>
-    // Admin credentials
-    const ADMIN_CREDENTIALS = {
-      userId: "PrateekShuprama890",
-      password: "Pradhya677@"
-    };
-
-    // Google Sheets Integration
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9BDeJVFmzb5ZwcFn5azya8WQDg5wBRASybxeAx2dm0gnGREtX3FJRj5KrRbozfAhdJQ/exec';
-    
-    // Cart functionality
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    let selectedPayment = '';
-
-    // Meal data with time-based availability
-    const meals = {
-      breakfast: {
-        name: "Breakfast Special",
-        items: "Poha + Chai + 4 Toast",
-        price: 40,
-        availableFrom: 7,
-        availableTo: 11,
-        emoji: "🌅"
-      },
-      lunch: {
-        name: "Lunch Thali",
-        items: "Mix veg pulao + dahi + salad",
-        price: 50,
-        availableFrom: 11,
-        availableTo: 15,
-        emoji: "🍽️"
-      },
-      dinner: {
-        name: "Dinner Thali",
-        items: "Rajma/Chhole + 4 Roti + Chawal + Raita",
-        price: 50,
-        availableFrom: 18,
-        availableTo: 22,
-        emoji: "🌙"
-      },
-      snacks: {
-        name: "Evening Snacks",
-        items: "Samosa + Chai + Biscuits",
-        price: 30,
-        availableFrom: 15,
-        availableTo: 18,
-        emoji: "☕"
-      }
-    };
-
     // Sidebar functionality
     function toggleSidebar() {
       const sidebar = document.getElementById("sidebar");
@@ -1666,33 +1518,33 @@
     }
 
     function handleLogin() {
-      const phoneOrUsername = document.getElementById('loginPhone').value.trim();
+      const phone = document.getElementById('loginPhone').value.trim();
       const password = document.getElementById('loginPassword').value.trim();
 
-      if (!phoneOrUsername || !password) {
+      if (!phone || !password) {
         alert('Please fill in all fields!');
         return;
       }
 
-      // Allow admin username or phone numbers
-      if (phoneOrUsername.length < 10 && phoneOrUsername !== ADMIN_CREDENTIALS.userId) {
-        alert('Please enter a valid 10-digit phone number or admin username!');
-        return;
-      }
-
+      // Show loading
       document.getElementById('loginBtnText').style.display = 'none';
       document.getElementById('loginBtnLoading').style.display = 'inline';
 
+      // Simulate login process
       setTimeout(() => {
-        // Check for main admin credentials first
-        if (phoneOrUsername === ADMIN_CREDENTIALS.userId && password === ADMIN_CREDENTIALS.password) {
+        // Get stored users
+        const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        const user = users.find(u => u.phone === phone && u.password === password);
+
+        if (user) {
+          // Login successful
           localStorage.setItem('user', JSON.stringify({
-            name: 'Admin',
-            userId: ADMIN_CREDENTIALS.userId,
-            phone: 'N/A',
-            email: 'admin@shuprama.com',
-            address: 'Admin Address',
-            isAdmin: true,
+            name: user.name,
+            userId: user.userId,
+            phone: user.phone,
+            email: user.email,
+            address: user.address,
+            isAdmin: user.isAdmin || false,
             loginTime: new Date().toISOString()
           }));
 
@@ -1700,37 +1552,16 @@
           showUserInfo();
           populateUserData();
           
-          alert('🎉 Welcome back, Admin!\n👑 Full admin access granted!\nYou can now manage the entire system!');
+          const welcomeMsg = user.isAdmin ? 
+            `🎉 Welcome back, ${user.name}!\n👑 Admin access granted!\nYou can now manage the system and place orders!` :
+            `🎉 Welcome back, ${user.name}!\nYou're now logged in and ready to order!`;
+          
+          alert(welcomeMsg);
         } else {
-          // Check registered users
-          const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-          const user = users.find(u => (u.phone === phoneOrUsername || u.userId === phoneOrUsername) && u.password === password);
-
-          if (user) {
-            localStorage.setItem('user', JSON.stringify({
-              name: user.name,
-              userId: user.userId,
-              phone: user.phone,
-              email: user.email,
-              address: user.address,
-              isAdmin: user.isAdmin || false,
-              loginTime: new Date().toISOString()
-            }));
-
-            hideLoginModal();
-            showUserInfo();
-            populateUserData();
-            
-            const welcomeMsg = user.isAdmin ? 
-              `🎉 Welcome back, ${user.name}!\n👑 Admin access granted!\nYou can now manage the system and place orders!` :
-              `🎉 Welcome back, ${user.name}!\nYou're now logged in and ready to order!`;
-            
-            alert(welcomeMsg);
-          } else {
-            alert('❌ Invalid credentials!\nPlease check your phone number/username and password or sign up if you\'re new.');
-          }
+          alert('❌ Invalid phone number or password!\nPlease check your credentials or sign up if you\'re new.');
         }
 
+        // Reset button
         document.getElementById('loginBtnText').style.display = 'inline';
         document.getElementById('loginBtnLoading').style.display = 'none';
       }, 1500);
@@ -1748,22 +1579,28 @@
         return;
       }
 
+      // Validate phone number
       if (phone.length < 10) {
-        alert('Please enter a valid 10-digit phone number!');
+        alert('Please enter a valid phone number!');
         return;
       }
 
+      // Validate email
       if (!email.includes('@')) {
         alert('Please enter a valid email address!');
         return;
       }
 
+      // Show loading
       document.getElementById('signupBtnText').style.display = 'none';
       document.getElementById('signupBtnLoading').style.display = 'inline';
 
+      // Simulate signup process
       setTimeout(() => {
+        // Get existing users
         const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
         
+        // Check if user already exists
         if (users.find(u => u.phone === phone)) {
           alert('❌ An account with this phone number already exists!\nPlease login instead.');
           document.getElementById('signupBtnText').style.display = 'inline';
@@ -1771,9 +1608,10 @@
           return;
         }
 
+        // Create new user
         const newUser = {
           name,
-          userId: phone,
+          userId: phone, // Use phone as userId for regular users
           phone,
           email,
           password,
@@ -1785,12 +1623,13 @@
         users.push(newUser);
         localStorage.setItem('registeredUsers', JSON.stringify(users));
 
+        // Auto login the new user
         localStorage.setItem('user', JSON.stringify({
-          name: newUser.name,
-          userId: newUser.phone,
-          phone: newUser.phone,
-          email: newUser.email,
-          address: newUser.address,
+          name,
+          userId: phone,
+          phone,
+          email,
+          address,
           isAdmin: false,
           loginTime: new Date().toISOString()
         }));
@@ -1799,12 +1638,13 @@
         showUserInfo();
         populateUserData();
         
-        alert(`🎉 Welcome to Shuprama, ${newUser.name}!\nYour account has been created and you're now logged in!\nReady to order delicious tiffins!`);
+        alert(`🎉 Welcome to Shuprama, ${name}!\nYour account has been created successfully!\nYou're now logged in and ready to order!`);
 
+        // Reset form
         document.getElementById('signupForm').reset();
         document.getElementById('signupBtnText').style.display = 'inline';
         document.getElementById('signupBtnLoading').style.display = 'none';
-      }, 1500);
+      }, 2000);
     }
 
     function showUserInfo() {
@@ -1813,6 +1653,7 @@
         document.getElementById('userDisplayName').textContent = user.name;
         document.getElementById('userInfo').style.display = 'block';
         
+        // Show admin panel link only for admin
         if (user.isAdmin || user.userId === ADMIN_CREDENTIALS.userId) {
           document.getElementById('adminPanelLink').style.display = 'block';
         } else {
@@ -1824,23 +1665,27 @@
     function populateUserData() {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
       if (user) {
+        // Populate form fields
         if (user.phone) document.getElementById('phone').value = user.phone;
         if (user.email) document.getElementById('email').value = user.email;
         if (user.name) document.getElementById('customerName').value = user.name;
         if (user.address) document.getElementById('address').value = user.address;
         
+        // Populate cart form fields
         if (user.name) document.getElementById('cartCustomerName').value = user.name;
         if (user.phone) document.getElementById('cartPhone').value = user.phone;
         if (user.address) document.getElementById('cartAddress').value = user.address;
       }
     }
 
+    // Logout functionality
     function logout() {
       if (confirm("Are you sure you want to logout?")) {
         localStorage.removeItem("user");
         document.getElementById('userInfo').style.display = 'none';
         document.getElementById('adminPanelLink').style.display = 'none';
         
+        // Clear form data
         document.getElementById('customerName').value = '';
         document.getElementById('phone').value = '';
         document.getElementById('email').value = '';
@@ -1849,6 +1694,7 @@
         document.getElementById('cartPhone').value = '';
         document.getElementById('cartAddress').value = '';
         
+        // Clear cart
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
@@ -1858,74 +1704,18 @@
       }
     }
 
-    function togglePassword() {
-      const passwordInput = document.getElementById('loginPassword');
-      const checkbox = document.getElementById('showPassword');
-      
-      if (checkbox.checked) {
-        passwordInput.type = 'text';
-      } else {
-        passwordInput.type = 'password';
-      }
-    }
-
-    function forgotPassword() {
-      const phone = prompt("📱 Enter your registered phone number:");
-      
-      if (!phone) return;
-      
-      const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
-      const user = users.find(u => u.phone === phone);
-      
-      if (user) {
-        alert(`🔑 Password Recovery\n\nYour account details:\n👤 Name: ${user.name}\n📱 Phone: ${user.phone}\n🔒 Password: ${user.password}\n📧 Email: ${user.email}\n\n⚠️ Please save this information securely!`);
-      } else {
-        alert("❌ No account found with this phone number!\nPlease check the number or sign up for a new account.");
-      }
-    }
-
-    function showUserData() {
-      const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
-      
-      if (!currentUser.name) {
-        alert("❌ You are not logged in!\nPlease login first to view your profile.");
-        return;
-      }
-      
-      const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-      const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
-      
-      let userData = `👤 Your Profile:\n\n`;
-      userData += `📝 Name: ${currentUser.name}\n`;
-      userData += `📱 Phone: ${currentUser.phone}\n`;
-      userData += `📧 Email: ${currentUser.email}\n`;
-      userData += `📍 Address: ${currentUser.address}\n`;
-      userData += `🕐 Last Login: ${new Date(currentUser.loginTime).toLocaleString()}\n\n`;
-      
-      userData += `📊 Order Summary:\n`;
-      userData += `📦 Total Orders: ${orderHistory.length}\n`;
-      userData += `🛒 Items in Cart: ${cartData.length}\n\n`;
-      
-      if (orderHistory.length > 0) {
-        userData += `🍽️ Recent Orders:\n`;
-        orderHistory.slice(0, 3).forEach((order, index) => {
-          userData += `${index + 1}. ${order.mealPlan || order.items} - ${new Date(order.timestamp).toLocaleDateString()}\n`;
-        });
-        userData += `\n📋 View complete order history from the menu.`;
-      } else {
-        userData += `🍽️ No orders yet. Place your first order today!`;
-      }
-      
-      alert(userData);
-    }
-
+    // Google Sheets Integration
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9BDeJVFmzb5ZwcFn5azya8WQDg5wBRASybxeAx2dm0gnGREtX3FJRj5KrRbozfAhdJQ/exec';
+    
     // Form submission
     document.getElementById('tiffinOrderForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
+      // Show loading state
       document.getElementById('submitText').style.display = 'none';
       document.getElementById('submitLoading').style.display = 'inline';
       
+      // Get form data
       const formData = new FormData(this);
       const orderData = {
         timestamp: new Date().toLocaleString('en-IN'),
@@ -1943,6 +1733,9 @@
         status: 'New Order'
       };
       
+      console.log('Sending order data:', orderData);
+      
+      // Send to Google Sheets
       fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         headers: {
@@ -1951,59 +1744,244 @@
         body: JSON.stringify(orderData)
       })
       .then(response => {
+        console.log('Order sent to Google Sheets successfully');
+        
+        // Save order to localStorage for customer history
         saveOrderToHistory(orderData);
         
+        // Show success message with order ID
         document.getElementById('successMessage').innerHTML = `
           ✅ Order placed successfully!<br>
           <strong>Order ID: ${orderData.orderId}</strong><br>
-          📱 Phone: ${orderData.phone}<br>
-          We'll contact you soon!
+          We'll contact you soon at ${orderData.phone}
         `;
         document.getElementById('successMessage').style.display = 'block';
         
+        // Reset form
         this.reset();
         
+        // Reset button state
+        document.getElementById('submitText').style.display = 'inline';
+        document.getElementById('submitLoading').style.display = 'none';
+        
+        // Scroll to success message
         document.getElementById('successMessage').scrollIntoView({ 
           behavior: 'smooth' 
         });
         
+        // Hide success message after 8 seconds
         setTimeout(() => {
           document.getElementById('successMessage').style.display = 'none';
         }, 8000);
         
       })
       .catch(error => {
+        console.error('Error:', error);
+        
+        // Still save locally and show success (fallback)
         saveOrderToHistory(orderData);
         
         document.getElementById('successMessage').innerHTML = `
           ✅ Order received!<br>
           <strong>Order ID: ${orderData.orderId}</strong><br>
-          📱 Phone: ${orderData.phone}<br>
           We'll contact you soon!
         `;
         document.getElementById('successMessage').style.display = 'block';
         
+        // Reset form and button
         this.reset();
+        document.getElementById('submitText').style.display = 'inline';
+        document.getElementById('submitLoading').style.display = 'none';
         
         setTimeout(() => {
           document.getElementById('successMessage').style.display = 'none';
         }, 8000);
       });
-      
-      document.getElementById('submitText').style.display = 'inline';
-      document.getElementById('submitLoading').style.display = 'none';
     });
 
+    // Save order to customer's local history
     function saveOrderToHistory(orderData) {
       let orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-      orderHistory.unshift(orderData);
+      orderHistory.unshift(orderData); // Add to beginning
       
+      // Keep only last 10 orders
       if (orderHistory.length > 10) {
         orderHistory = orderHistory.slice(0, 10);
       }
       
       localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
     }
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close sidebar on mobile
+          document.getElementById("sidebar").style.width = "0";
+        }
+      });
+    });
+
+    // Form validation enhancements
+    const requiredInputs = document.querySelectorAll('input[required], select[required]');
+    requiredInputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        if (!this.value.trim()) {
+          this.style.borderColor = '#ff6b6b';
+          this.style.boxShadow = '0 0 10px rgba(255, 107, 107, 0.3)';
+        } else {
+          this.style.borderColor = '#00b894';
+          this.style.boxShadow = '0 0 10px rgba(0, 184, 148, 0.3)';
+        }
+      });
+    });
+
+    // Phone number validation
+    document.getElementById('phone').addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9+\-\s]/g, '');
+    });
+
+    // Set minimum date to today
+    document.getElementById('startDate').min = new Date().toISOString().split('T')[0];
+
+    // Initialize user session and create admin if not exists
+    window.addEventListener('load', function() {
+      // Create admin account if it doesn't exist
+      const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const adminExists = users.find(u => u.userId === ADMIN_CREDENTIALS.userId);
+      
+      if (!adminExists) {
+        const adminUser = {
+          name: "Prateek Shuprama",
+          userId: ADMIN_CREDENTIALS.userId,
+          phone: "9149153015",
+          email: "admin@shuprama.com",
+          password: ADMIN_CREDENTIALS.password,
+          address: "Shuprama Kitchen, Bareilly",
+          signupDate: new Date().toISOString(),
+          role: "admin",
+          isAdmin: true
+        };
+        users.push(adminUser);
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+      }
+      
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      if (user && user.name) {
+        showUserInfo();
+        populateUserData();
+      }
+    });
+
+    // Today's Menu Functionality
+    const menu = {
+      Monday: {
+        Breakfast: "Poha + Chai + 4 Toast ₹40",
+        Lunch: "Mix veg pulao + dahi + salad ₹50",
+        Dinner: "Rajma/Chhole + 4 Roti + Chawal + Raita ₹50"
+      },
+      Tuesday: {
+        Breakfast: "Halwa + Chana + Chai ₹40",
+        Lunch: "Chane ki ghugni + 2 Paratha + Achar ₹50",
+        Dinner: "Arhar Daal + 4 Roti + Chawal + Sabji ₹50"
+      },
+      Wednesday: {
+        Breakfast: "Daliya + Fried Aloo + Chai ₹40",
+        Lunch: "Vegetable khichdi + Papad ₹50",
+        Dinner: "Soyabean + 4 Roti + Chawal + Raita ₹50"
+      },
+      Thursday: {
+        Breakfast: "Roti/Paratha + Sabji + Chai ₹40",
+        Lunch: "Soya chunks curry + 4 Roti + Salad ₹50",
+        Dinner: "Moong/Masoor + 4 Roti + Chawal + Sabji ₹50"
+      },
+      Friday: {
+        Breakfast: "Dosa + Chai + Tomato Sauce ₹40",
+        Lunch: "Besan ki Kadhi + 4 Roti + Chawal ₹50",
+        Dinner: "Malka Daal + 4 Roti + Chawal + Sabji ₹50"
+      },
+      Saturday: {
+        Breakfast: "Chhole + Kulche + Chai ₹40",
+        Lunch: "Lauki Chana Daal + 4 Roti + Achar ₹50",
+        Dinner: "Aloo Tamatar + 4 Roti + Chawal + Raita ₹50"
+      },
+      Sunday: {
+        Breakfast: "Kachauri + Chai ₹40",
+        Lunch: "Veg pulao + dahi + Salad ₹50",
+        Dinner: "Paneer + 4 Roti + Chawal + Raita ₹60"
+      }
+    };
+
+    // Display today's menu
+    function displayTodaysMenu() {
+      const today = new Date().toLocaleString('en-US', { weekday: 'long' });
+      const todayMenu = menu[today];
+      const menuList = document.getElementById("menu-list");
+      const currentDay = document.getElementById("current-day");
+
+      if (currentDay) {
+        currentDay.textContent = `${today}'s Special Menu`;
+      }
+
+      if (todayMenu && menuList) {
+        menuList.innerHTML = `
+          <li><strong>🌅 Breakfast:</strong> ${todayMenu.Breakfast}</li>
+          <li><strong>🍽️ Lunch:</strong> ${todayMenu.Lunch}</li>
+          <li><strong>🌙 Dinner:</strong> ${todayMenu.Dinner}</li>
+        `;
+      } else if (menuList) {
+        menuList.innerHTML = "<li>No menu available today.</li>";
+      }
+    }
+
+    // Initialize menu display
+    displayTodaysMenu();
+
+    // Cart functionality
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    let selectedPayment = '';
+
+    // Meal data with time-based availability
+    const meals = {
+      breakfast: {
+        name: "Breakfast Special",
+        items: "Poha + Chai + 4 Toast",
+        price: 40,
+        availableFrom: 7,
+        availableTo: 11,
+        emoji: "🌅"
+      },
+      lunch: {
+        name: "Lunch Thali",
+        items: "Mix veg pulao + dahi + salad",
+        price: 50,
+        availableFrom: 11,
+        availableTo: 15,
+        emoji: "🍽️"
+      },
+      dinner: {
+        name: "Dinner Thali",
+        items: "Rajma/Chhole + 4 Roti + Chawal + Raita",
+        price: 50,
+        availableFrom: 18,
+        availableTo: 22,
+        emoji: "🌙"
+      },
+      snacks: {
+        name: "Evening Snacks",
+        items: "Samosa + Chai + Biscuits",
+        price: 30,
+        availableFrom: 15,
+        availableTo: 18,
+        emoji: "☕"
+      }
+    };
 
     // Load meals based on current time
     function loadMeals() {
@@ -2040,6 +2018,7 @@
       container.innerHTML = mealsHTML;
     }
 
+    // Add to cart function
     function addToCart(mealType) {
       const meal = meals[mealType];
       const existingItem = cart.find(item => item.type === mealType);
@@ -2060,6 +2039,7 @@
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCartCount();
       
+      // Show success animation
       const button = event.target;
       const originalText = button.innerHTML;
       button.innerHTML = '✅ Added!';
@@ -2071,6 +2051,7 @@
       }, 1000);
     }
 
+    // Update cart count
     function updateCartCount() {
       const cartCount = document.getElementById('cartCount');
       const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -2083,15 +2064,18 @@
       }
     }
 
+    // Open cart modal
     function openCart() {
       document.getElementById('cartModal').style.display = 'block';
       displayCartItems();
     }
 
+    // Close cart modal
     function closeCart() {
       document.getElementById('cartModal').style.display = 'none';
     }
 
+    // Display cart items
     function displayCartItems() {
       const cartItems = document.getElementById('cartItems');
       const cartTotal = document.getElementById('cartTotal');
@@ -2142,6 +2126,7 @@
       
       cartItems.innerHTML = itemsHTML;
       
+      // Update totals
       document.getElementById('subtotal').textContent = `₹${subtotal}`;
       document.getElementById('totalAmount').textContent = `₹${subtotal}`;
       
@@ -2149,6 +2134,7 @@
       paymentSection.style.display = 'block';
     }
 
+    // Update quantity
     function updateQuantity(index, change) {
       cart[index].quantity += change;
       
@@ -2161,6 +2147,7 @@
       displayCartItems();
     }
 
+    // Remove from cart
     function removeFromCart(index) {
       cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(cart));
@@ -2168,13 +2155,16 @@
       displayCartItems();
     }
 
+    // Select payment method
     function selectPayment(method) {
       selectedPayment = method;
       
+      // Remove selected class from all options
       document.querySelectorAll('.payment-option').forEach(option => {
         option.classList.remove('selected');
       });
       
+      // Add selected class to chosen option
       if (method === 'online') {
         document.getElementById('onlinePayment').classList.add('selected');
         document.getElementById('checkoutBtn').innerHTML = '💳 Pay Online & Order';
@@ -2184,6 +2174,7 @@
       }
     }
 
+    // Process order
     function processOrder() {
       const customerName = document.getElementById('cartCustomerName').value.trim();
       const phone = document.getElementById('cartPhone').value.trim();
@@ -2204,8 +2195,10 @@
         return;
       }
       
+      // Calculate total
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       
+      // Create order data
       const orderData = {
         timestamp: new Date().toLocaleString('en-IN'),
         orderId: 'TIF' + Date.now(),
@@ -2220,8 +2213,12 @@
         cartDetails: JSON.stringify(cart)
       };
       
+      console.log('Sending cart order data:', orderData);
+      
+      // Show loading
       document.getElementById('checkoutBtn').innerHTML = '<span class="loading"></span> Processing...';
       
+      // Send to Google Sheets (same as before)
       fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         headers: {
@@ -2230,22 +2227,30 @@
         body: JSON.stringify(orderData)
       })
       .then(() => {
+        // Save to order history
         saveOrderToHistory(orderData);
         
+        // Handle payment
         if (selectedPayment === 'online') {
+          // Redirect to UPI payment
           window.open(`upi://pay?pa=prateekshukla388@naviaxis&pn=Shuprama%20Kitchen&am=${subtotal}&cu=INR&tn=Order%20${orderData.orderId}`, '_blank');
         }
         
+        // Clear cart
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         
+        // Show success
         alert(`🎉 Order placed successfully!\nOrder ID: ${orderData.orderId}\nTotal: ₹${subtotal}\nPayment: ${orderData.paymentMethod}\n\nWe'll contact you soon!`);
         
         closeCart();
         
       })
       .catch(error => {
+        console.error('Error:', error);
+        
+        // Still process locally
         saveOrderToHistory(orderData);
         
         if (selectedPayment === 'online') {
@@ -2262,62 +2267,137 @@
       });
     }
 
-    function showOrderHistory() {
-      const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
-      const modal = document.getElementById('orderHistoryModal');
-      const content = document.getElementById('orderHistoryContent');
+    // Password and User Management Functions
+    function togglePassword() {
+      const passwordInput = document.getElementById('loginPassword');
+      const checkbox = document.getElementById('showPassword');
       
-      if (orderHistory.length === 0) {
-        content.innerHTML = `
-          <div style="text-align: center; padding: 40px;">
-            <h3 style="color: #feca57; margin-bottom: 20px;">📦 No Orders Yet</h3>
-            <p style="color: white; font-size: 1.1em; margin-bottom: 30px;">You haven't placed any orders yet. Start ordering delicious tiffins!</p>
-            <button onclick="closeOrderHistory(); document.getElementById('menu').scrollIntoView({behavior: 'smooth'})" 
-                    style="background: linear-gradient(135deg, #feca57, #ff6b6b); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.1em; cursor: pointer; font-weight: 600;">
-              🍽️ Browse Menu
-            </button>
-          </div>
-        `;
+      if (checkbox.checked) {
+        passwordInput.type = 'text';
       } else {
-        let historyHTML = '';
-        orderHistory.forEach((order, index) => {
-          historyHTML += `
-            <div class="order-item">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
-                <h3 style="color: #feca57; margin: 0;">Order #${order.orderId}</h3>
-                <span style="background: #00b894; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em;">
-                  ${order.status || 'Completed'}
-                </span>
-              </div>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
-                <div><strong>📅 Date:</strong> ${new Date(order.timestamp).toLocaleDateString()}</div>
-                <div><strong>🍽️ Items:</strong> ${order.mealPlan || order.items}</div>
-                <div><strong>💰 Amount:</strong> ₹${order.totalAmount || 'N/A'}</div>
-                <div><strong>📱 Phone:</strong> ${order.phone}</div>
-              </div>
-              ${order.address ? `<div style="margin-top: 10px;"><strong>📍 Address:</strong> ${order.address}</div>` : ''}
-            </div>
-          `;
-        });
-        content.innerHTML = historyHTML;
+        passwordInput.type = 'password';
       }
-      
-      modal.style.display = 'block';
     }
 
-    function closeOrderHistory() {
-      document.getElementById('orderHistoryModal').style.display = 'none';
+    function forgotPassword() {
+      const phone = prompt("📱 Enter your registered phone number:");
+      
+      if (!phone) return;
+      
+      const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const user = users.find(u => u.phone === phone);
+      
+      if (user) {
+        alert(`🔑 Password Recovery\n\nYour account details:\n👤 Name: ${user.name}\n📱 Phone: ${user.phone}\n🔒 Password: ${user.password}\n📧 Email: ${user.email}\n\n⚠️ Please save this information securely!`);
+      } else {
+        alert("❌ No account found with this phone number!\nPlease check the number or sign up for a new account.");
+      }
+    }
+
+
+
+    function showUserData() {
+      const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+      
+      if (!currentUser.name) {
+        alert("❌ You are not logged in!\nPlease login first to view your profile.");
+        return;
+      }
+      
+      const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+      const cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+      
+      let userData = `👤 Your Profile:\n\n`;
+      userData += `📝 Name: ${currentUser.name}\n`;
+      userData += `📱 Phone: ${currentUser.phone}\n`;
+      userData += `📧 Email: ${currentUser.email}\n`;
+      userData += `📍 Address: ${currentUser.address}\n`;
+      userData += `🕐 Last Login: ${new Date(currentUser.loginTime).toLocaleString()}\n\n`;
+      
+      userData += `📊 Order Summary:\n`;
+      userData += `📦 Total Orders: ${orderHistory.length}\n`;
+      userData += `🛒 Items in Cart: ${cartData.length}\n\n`;
+      
+      if (orderHistory.length > 0) {
+        userData += `🍽️ Recent Orders:\n`;
+        orderHistory.slice(0, 3).forEach((order, index) => {
+          userData += `${index + 1}. ${order.mealPlan || order.items} - ${new Date(order.timestamp).toLocaleDateString()}\n`;
+        });
+        userData += `\n📋 View complete order history from the menu.`;
+      } else {
+        userData += `🍽️ No orders yet. Place your first order today!`;
+      }
+      
+      alert(userData);
+    }
+
+    // Enhanced login with better error handling
+    function handleLoginEnhanced() {
+      const phone = document.getElementById('loginPhone').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      if (!phone || !password) {
+        alert('Please fill in all fields!');
+        return;
+      }
+
+      // Show loading
+      document.getElementById('loginBtnText').style.display = 'none';
+      document.getElementById('loginBtnLoading').style.display = 'inline';
+
+      // Simulate login process
+      setTimeout(() => {
+        // Get stored users
+        const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        const user = users.find(u => u.phone === phone && u.password === password);
+
+        if (user) {
+          // Login successful
+          localStorage.setItem('user', JSON.stringify({
+            name: user.name,
+            phone: user.phone,
+            email: user.email,
+            address: user.address,
+            loginTime: new Date().toISOString()
+          }));
+
+          hideLoginModal();
+          showUserInfo();
+          populateUserData();
+          
+          alert(`🎉 Welcome back, ${user.name}!\n\n✅ Login successful!\n🍛 You can now place orders\n📱 Your data has been loaded automatically\n\n🕐 Login Time: ${new Date().toLocaleString()}`);
+        } else {
+          // Check if phone exists but wrong password
+          const phoneExists = users.find(u => u.phone === phone);
+          if (phoneExists) {
+            alert(`❌ Incorrect password for ${phone}!\n\n💡 Tip: Click "Forgot Password?" to recover your password\n👁️ Or use "Show Password" checkbox to verify your input`);
+          } else {
+            alert(`❌ No account found with phone number: ${phone}\n\n📝 Please check the number or sign up for a new account\n👥 Click "View All Users" to see registered numbers`);
+          }
+        }
+
+        // Reset button
+        document.getElementById('loginBtnText').style.display = 'inline';
+        document.getElementById('loginBtnLoading').style.display = 'none';
+      }, 1500);
     }
 
     // Admin Panel Functions
+    const ADMIN_CREDENTIALS = {
+      userId: "PrateekShuprama890",
+      password: "Pradhya677@"
+    };
+
     function checkAdminAccess() {
       const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
       
+      // Check if current user is already an admin
       if (currentUser.isAdmin || currentUser.userId === ADMIN_CREDENTIALS.userId) {
         showAdminPanel();
         return;
       }
       
+      // Check if user is logged in but not admin
       if (currentUser.name) {
         const adminUserId = prompt("🔐 Admin Access Required\n\nYou are logged in as a regular user.\nEnter admin user ID to access admin panel:");
         if (!adminUserId) return;
@@ -2325,7 +2405,9 @@
         const adminPassword = prompt("🔑 Enter admin password:");
         if (!adminPassword) return;
         
+        // Check against main admin credentials
         if (adminUserId === ADMIN_CREDENTIALS.userId && adminPassword === ADMIN_CREDENTIALS.password) {
+          // Update current user session to include admin privileges
           currentUser.isAdmin = true;
           currentUser.adminAccess = true;
           localStorage.setItem('user', JSON.stringify(currentUser));
@@ -2333,8 +2415,10 @@
           alert("✅ Admin access granted!\nYou now have admin privileges for this session.");
           showAdminPanel();
           
+          // Show admin panel link
           document.getElementById('adminPanelLink').style.display = 'block';
         } else {
+          // Check against registered admin users
           const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
           const admin = users.find(u => u.userId === adminUserId && u.password === adminPassword && u.isAdmin);
           
@@ -2345,11 +2429,13 @@
             
             alert("✅ Admin access granted!\nYou now have admin privileges for this session.");
             showAdminPanel();
+            document.getElementById('adminPanelLink').style.display = 'block';
           } else {
             alert("❌ Invalid admin credentials!\nAccess denied.");
           }
         }
       } else {
+        // User not logged in
         alert("🔐 Please login first!\n\nYou need to be logged in to access the admin panel.\nClick the login button to continue.");
         showLoginModal();
       }
@@ -2423,6 +2509,7 @@
         return;
       }
       
+      // Create modal content instead of new window
       const modalHTML = `
         <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 4000; display: flex; align-items: center; justify-content: center;" onclick="this.remove()">
           <div style="background: linear-gradient(135deg, #667eea, #764ba2); width: 90%; max-width: 1000px; max-height: 90%; overflow-y: auto; border-radius: 20px; padding: 30px; color: white; position: relative;" onclick="event.stopPropagation()">
@@ -2464,9 +2551,9 @@
         return;
       }
       
-      const csvContent = "Name,Phone,Password,Email,Address,Signup Date,Role\n" + 
+      const csvContent = "Name,Phone,Password,Email,Address,Signup Date\n" + 
         users.map(user => 
-          `"${user.name}","${user.phone}","${user.password}","${user.email}","${user.address}","${new Date(user.signupDate).toLocaleString()}","${user.isAdmin ? 'Admin' : 'Customer'}"`
+          `"${user.name}","${user.phone}","${user.password}","${user.email}","${user.address}","${new Date(user.signupDate).toLocaleString()}"`
         ).join('\n');
       
       const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -2488,6 +2575,7 @@
         return;
       }
       
+      // Create modal content with better organization
       const modalHTML = `
         <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 4000; display: flex; align-items: center; justify-content: center;" onclick="this.remove()">
           <div style="background: linear-gradient(135deg, #667eea, #764ba2); width: 95%; max-width: 1200px; max-height: 90%; overflow-y: auto; border-radius: 20px; padding: 30px; color: white; position: relative;" onclick="event.stopPropagation()">
@@ -2498,25 +2586,29 @@
                 <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; border-left: 4px solid ${order.status === 'New Order' ? '#feca57' : '#00b894'};">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
                     <h3 style="color: #feca57; margin: 0; font-size: 1.3em;">Order #${order.orderId}</h3>
-                    <span style="background: ${order.status === 'New Order' ? '#feca57' : '#00b894'}; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em;">
-                      ${order.status || 'Completed'}
+                    <span style="background: ${order.status === 'New Order' ? '#feca57' : '#00b894'}; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
+                      ${order.status}
                     </span>
                   </div>
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
                     <div><strong>👤 Customer:</strong> ${order.customerName}</div>
                     <div><strong>📱 Phone:</strong> ${order.phone}</div>
+                    <div><strong>📧 Email:</strong> ${order.email || 'Not provided'}</div>
                     <div><strong>📅 Date:</strong> ${new Date(order.timestamp).toLocaleDateString()}</div>
-                    <div><strong>🍽️ Items:</strong> ${order.mealPlan || order.items}</div>
+                    <div><strong>🍽️ Meal:</strong> ${order.mealPlan || order.items || 'N/A'}</div>
                     <div><strong>💰 Amount:</strong> ₹${order.totalAmount || 'N/A'}</div>
-                    <div><strong>💳 Payment:</strong> ${order.paymentMethod || 'N/A'}</div>
+                    <div><strong>💳 Payment:</strong> ${order.paymentMethod || 'Not specified'}</div>
+                    <div><strong>⏰ Duration:</strong> ${order.duration || 'Not specified'}</div>
                   </div>
-                  ${order.address ? `<div style="margin-top: 15px;"><strong>📍 Address:</strong> ${order.address}</div>` : ''}
-                  ${order.specialRequests && order.specialRequests !== 'None' ? `<div style="margin-top: 10px;"><strong>📝 Special Requests:</strong> ${order.specialRequests}</div>` : ''}
+                  <div style="margin-top: 15px;">
+                    <div><strong>📍 Address:</strong> ${order.address}</div>
+                    ${order.specialRequests && order.specialRequests !== 'None' ? `<div style="margin-top: 10px;"><strong>📝 Special Requests:</strong> ${order.specialRequests}</div>` : ''}
+                  </div>
                 </div>
               `).join('')}
             </div>
             <div style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px;">
-              <p><strong>📊 Total Orders:</strong> ${orders.length} | <strong>💰 Total Revenue:</strong> ₹${orders.reduce((sum, order) => sum + (parseInt(order.totalAmount) || 0), 0)}</p>
+              <p><strong>📊 Total Orders:</strong> ${orders.length} | <strong>💰 Total Revenue:</strong> ₹${orders.reduce((sum, order) => sum + (parseInt(order.totalAmount) || 0), 0)} | <strong>💾 Data Size:</strong> ${Math.round(JSON.stringify(orders).length / 1024)} KB</p>
               <button onclick="exportOrderData()" style="background: #00b894; color: white; padding: 12px 25px; border: none; border-radius: 20px; cursor: pointer; margin: 10px; font-weight: 600;">📥 Export CSV</button>
               <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #ff6b6b; color: white; padding: 12px 25px; border: none; border-radius: 20px; cursor: pointer; margin: 10px; font-weight: 600;">✖️ Close</button>
             </div>
@@ -2535,9 +2627,9 @@
         return;
       }
       
-      const csvContent = "Order ID,Customer Name,Phone,Email,Address,Items,Amount,Payment Method,Date,Status\n" + 
+      const csvContent = "Order ID,Customer Name,Phone,Email,Address,Meal Plan,Amount,Payment Method,Order Date,Status\n" + 
         orders.map(order => 
-          `"${order.orderId}","${order.customerName}","${order.phone}","${order.email || 'N/A'}","${order.address}","${order.mealPlan || order.items}","${order.totalAmount || 'N/A'}","${order.paymentMethod || 'N/A'}","${new Date(order.timestamp).toLocaleString()}","${order.status || 'Completed'}"`
+          `"${order.orderId}","${order.customerName}","${order.phone}","${order.email || 'Not provided'}","${order.address}","${order.mealPlan}","${order.totalAmount || 'N/A'}","${order.paymentMethod || 'Not specified'}","${order.timestamp}","${order.status}"`
         ).join('\n');
       
       const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -2551,117 +2643,408 @@
       alert(`📥 Order data exported successfully!\n${orders.length} orders exported to CSV file.`);
     }
 
+    function createTestUser() {
+      const testUser = {
+        name: "Test User " + Math.floor(Math.random() * 1000),
+        phone: "9876543" + Math.floor(Math.random() * 1000).toString().padStart(3, '0'),
+        email: "test" + Math.floor(Math.random() * 1000) + "@example.com",
+        password: "test123",
+        address: "Test Address, Bareilly",
+        signupDate: new Date().toISOString()
+      };
+      
+      const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      users.push(testUser);
+      localStorage.setItem('registeredUsers', JSON.stringify(users));
+      
+      updateSystemStats();
+      
+      alert(`👤 Test user created successfully!\n\n📱 Phone: ${testUser.phone}\n🔒 Password: ${testUser.password}\n👤 Name: ${testUser.name}\n\nYou can now login with these credentials!`);
+    }
+
     function clearAllUsers() {
-      if (confirm("⚠️ WARNING: This will delete ALL user accounts!\n\nThis action cannot be undone. Are you absolutely sure?")) {
-        if (confirm("🚨 FINAL CONFIRMATION\n\nThis will permanently delete all user data including:\n- All registered accounts\n- User profiles\n- Login credentials\n\nType 'DELETE' in the next prompt to confirm.")) {
-          const confirmation = prompt("Type 'DELETE' to confirm deletion of all users:");
-          if (confirmation === 'DELETE') {
-            localStorage.removeItem('registeredUsers');
-            alert("✅ All user accounts have been deleted successfully!");
-            updateSystemStats();
-          } else {
-            alert("❌ Deletion cancelled. User data is safe.");
-          }
+      if (confirm("⚠️ WARNING!\n\nThis will permanently delete ALL user accounts!\n\nAre you sure you want to continue?")) {
+        if (confirm("🚨 FINAL CONFIRMATION!\n\nThis action cannot be undone!\nAll user data will be lost forever!\n\nClick OK to proceed with deletion.")) {
+          localStorage.removeItem('registeredUsers');
+          localStorage.removeItem('user'); // Also logout current user
+          
+          updateSystemStats();
+          
+          alert("🗑️ All user data has been cleared!\n\nThe system has been reset to initial state.\nYou will need to sign up again to use the service.");
+          
+          // Force logout and show login modal
+          document.getElementById('userInfo').style.display = 'none';
+          showLoginModal();
+          closeAdminPanel();
         }
       }
     }
 
     function clearAllOrders() {
-      if (confirm("⚠️ WARNING: This will delete ALL order history!\n\nThis action cannot be undone. Are you absolutely sure?")) {
-        if (confirm("🚨 FINAL CONFIRMATION\n\nThis will permanently delete all order data including:\n- Order history\n- Customer orders\n- Revenue records\n\nType 'DELETE' in the next prompt to confirm.")) {
-          const confirmation = prompt("Type 'DELETE' to confirm deletion of all orders:");
-          if (confirmation === 'DELETE') {
-            localStorage.removeItem('orderHistory');
-            alert("✅ All order history has been deleted successfully!");
-            updateSystemStats();
-          } else {
-            alert("❌ Deletion cancelled. Order data is safe.");
-          }
+      if (confirm("⚠️ WARNING!\n\nThis will permanently delete ALL order history!\n\nAre you sure you want to continue?")) {
+        localStorage.removeItem('orderHistory');
+        updateSystemStats();
+        alert("🗑️ All order history has been cleared!");
+      }
+    }
+
+    function resetSystem() {
+      if (confirm("🚨 SYSTEM RESET WARNING!\n\nThis will delete ALL data:\n• All user accounts\n• All order history\n• All cart data\n• All settings\n\nThis action cannot be undone!\n\nAre you sure?")) {
+        if (confirm("🔥 FINAL WARNING!\n\nYou are about to completely reset the system!\n\nClick OK to proceed with FULL SYSTEM RESET.")) {
+          // Clear all localStorage data
+          localStorage.clear();
+          
+          alert("🔄 System has been completely reset!\n\nAll data has been cleared.\nThe page will reload to initial state.");
+          
+          // Reload the page
+          window.location.reload();
         }
       }
     }
 
+    function backupData() {
+      const allData = {
+        users: JSON.parse(localStorage.getItem('registeredUsers') || '[]'),
+        orders: JSON.parse(localStorage.getItem('orderHistory') || '[]'),
+        currentUser: JSON.parse(localStorage.getItem('user') || '{}'),
+        cart: JSON.parse(localStorage.getItem('cart') || '[]'),
+        backupDate: new Date().toISOString(),
+        version: "1.0"
+      };
+      
+      const dataStr = JSON.stringify(allData, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `shuprama-backup-${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      
+      alert(`💾 System backup created successfully!\n\nBackup includes:\n• ${allData.users.length} users\n• ${allData.orders.length} orders\n• Current session data\n• Cart data\n\nFile saved as JSON format.`);
+    }
+
+    // Admin Management Functions
     function addNewAdmin() {
-      const adminName = prompt("👤 Enter admin name:");
-      if (!adminName) return;
+      const name = prompt("👤 Enter admin name:");
+      if (!name) return;
       
-      const adminPhone = prompt("📱 Enter admin phone number:");
-      if (!adminPhone || adminPhone.length < 10) {
-        alert("❌ Please enter a valid 10-digit phone number!");
-        return;
-      }
+      const userId = prompt("🆔 Enter admin user ID:");
+      if (!userId) return;
       
-      const adminEmail = prompt("📧 Enter admin email:");
-      if (!adminEmail || !adminEmail.includes('@')) {
-        alert("❌ Please enter a valid email address!");
-        return;
-      }
+      const phone = prompt("📱 Enter admin phone number:");
+      if (!phone) return;
       
-      const adminUserId = prompt("🆔 Enter admin user ID:");
-      if (!adminUserId) return;
+      const email = prompt("📧 Enter admin email:");
+      if (!email) return;
       
-      const adminPassword = prompt("🔒 Enter admin password:");
-      if (!adminPassword || adminPassword.length < 6) {
-        alert("❌ Password must be at least 6 characters long!");
-        return;
-      }
-      
-      const adminAddress = prompt("🏠 Enter admin address:");
-      if (!adminAddress) return;
+      const password = prompt("🔒 Enter admin password:");
+      if (!password) return;
       
       const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
       
       // Check if user ID or phone already exists
-      if (users.find(u => u.userId === adminUserId || u.phone === adminPhone)) {
-        alert("❌ An account with this user ID or phone number already exists!");
+      if (users.find(u => u.userId === userId || u.phone === phone)) {
+        alert("❌ User ID or phone number already exists!");
         return;
       }
       
       const newAdmin = {
-        name: adminName,
-        userId: adminUserId,
-        phone: adminPhone,
-        email: adminEmail,
-        password: adminPassword,
-        address: adminAddress,
+        name: name,
+        userId: userId,
+        phone: phone,
+        email: email,
+        password: password,
+        address: "Admin Address",
         signupDate: new Date().toISOString(),
-        isAdmin: true,
-        role: "admin"
+        role: "admin",
+        isAdmin: true
       };
       
       users.push(newAdmin);
       localStorage.setItem('registeredUsers', JSON.stringify(users));
       
-      alert(`✅ New admin created successfully!\n\n👤 Name: ${adminName}\n🆔 User ID: ${adminUserId}\n📱 Phone: ${adminPhone}\n📧 Email: ${adminEmail}\n🔒 Password: ${adminPassword}\n\n⚠️ Please save these credentials securely!`);
       updateSystemStats();
+      
+      alert(`✅ New admin added successfully!\n\n👤 Name: ${name}\n🆔 User ID: ${userId}\n📱 Phone: ${phone}\n🔒 Password: ${password}\n\nAdmin can now access the admin panel!`);
     }
 
     function removeAdmin() {
       const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
       const admins = users.filter(u => u.isAdmin);
       
-      if (admins.length === 0) {
-        alert("❌ No admin accounts found to remove!");
+      if (admins.length <= 1) {
+        alert("❌ Cannot remove admin!\nAt least one admin must remain in the system.");
         return;
       }
       
-      let adminList = "Select admin to remove:\n\n";
+      let adminList = "👑 Current Admins:\n\n";
       admins.forEach((admin, index) => {
-        adminList += `${index + 1}. ${admin.name} (${admin.userId}) - ${admin.phone}\n`;
+        adminList += `${index + 1}. ${admin.name} (${admin.userId})\n`;
       });
       
-      const selection = prompt(adminList + "\nEnter the number of admin to remove:");
-      const adminIndex = parseInt(selection) - 1;
+      const userIdToRemove = prompt(adminList + "\n🗑️ Enter the User ID of admin to remove:");
+      if (!userIdToRemove) return;
       
-      if (isNaN(adminIndex) || adminIndex < 0 || adminIndex >= admins.length) {
-        alert("❌ Invalid selection!");
+      if (userIdToRemove === ADMIN_CREDENTIALS.userId) {
+        alert("❌ Cannot remove the main admin account!");
         return;
       }
       
-      const adminToRemove = admins[adminIndex];
+      const adminIndex = users.findIndex(u => u.userId === userIdToRemove && u.isAdmin);
       
-      // Prevent removing the main admin
-      if (adminToRemove.userId === ADMIN_CREDENTIALS.userId) {
-        alert("❌ Cannot remove the main admin account!");
+      if (adminIndex === -1) {
+        alert("❌ Admin not found with this User ID!");
         return;
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'967deccaa736b2cb',t:'MTc1Mzk3MzYwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+      }
+      
+      if (confirm(`⚠️ Are you sure you want to remove admin:\n\n👤 ${users[adminIndex].name}\n🆔 ${users[adminIndex].userId}\n\nThis action cannot be undone!`)) {
+        const removedAdmin = users[adminIndex];
+        users.splice(adminIndex, 1);
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+        
+        updateSystemStats();
+        
+        alert(`✅ Admin removed successfully!\n\n👤 ${removedAdmin.name} (${removedAdmin.userId}) is no longer an admin.`);
+      }
+    }
+
+    function changeAdminPassword() {
+      const userIdToChange = prompt("🆔 Enter admin User ID to change password:");
+      if (!userIdToChange) return;
+      
+      const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const adminIndex = users.findIndex(u => u.userId === userIdToChange && u.isAdmin);
+      
+      if (adminIndex === -1) {
+        alert("❌ Admin not found with this User ID!");
+        return;
+      }
+      
+      const currentPassword = prompt("🔒 Enter current password:");
+      if (!currentPassword) return;
+      
+      if (users[adminIndex].password !== currentPassword) {
+        alert("❌ Current password is incorrect!");
+        return;
+      }
+      
+      const newPassword = prompt("🔑 Enter new password:");
+      if (!newPassword) return;
+      
+      const confirmPassword = prompt("🔑 Confirm new password:");
+      if (newPassword !== confirmPassword) {
+        alert("❌ Passwords do not match!");
+        return;
+      }
+      
+      users[adminIndex].password = newPassword;
+      localStorage.setItem('registeredUsers', JSON.stringify(users));
+      
+      // Update main admin credentials if it's the main admin
+      if (userIdToChange === ADMIN_CREDENTIALS.userId) {
+        // Note: This only updates the stored user, not the constant
+        alert(`✅ Password changed successfully!\n\n👤 Admin: ${users[adminIndex].name}\n🆔 User ID: ${userIdToChange}\n🔑 New Password: ${newPassword}\n\n⚠️ Please remember the new password!`);
+      } else {
+        alert(`✅ Password changed successfully!\n\n👤 Admin: ${users[adminIndex].name}\n🔑 New Password: ${newPassword}`);
+      }
+    }
+
+    function viewAllAdmins() {
+      const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+      const admins = users.filter(u => u.isAdmin);
+      
+      if (admins.length === 0) {
+        alert("👑 No admins found in the system!");
+        return;
+      }
+      
+      // Create modal content for admin display
+      const modalHTML = `
+        <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 4000; display: flex; align-items: center; justify-content: center;" onclick="this.remove()">
+          <div style="background: linear-gradient(135deg, #667eea, #764ba2); width: 90%; max-width: 1000px; max-height: 90%; overflow-y: auto; border-radius: 20px; padding: 30px; color: white; position: relative;" onclick="event.stopPropagation()">
+            <span onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: 15px; right: 25px; color: white; font-size: 30px; cursor: pointer; font-weight: bold;">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 30px; color: #feca57;">👑 Admin Database (${admins.length} Admins)</h2>
+            <div style="display: grid; gap: 20px;">
+              ${admins.map((admin, index) => `
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border-left: 4px solid #ff6b6b;">
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div><strong>👤 Name:</strong> ${admin.name}</div>
+                    <div><strong>🆔 User ID:</strong> ${admin.userId}</div>
+                    <div><strong>📱 Phone:</strong> ${admin.phone}</div>
+                    <div><strong>🔒 Password:</strong> ${admin.password}</div>
+                    <div><strong>📧 Email:</strong> ${admin.email}</div>
+                    <div><strong>📅 Added:</strong> ${new Date(admin.signupDate).toLocaleDateString()}</div>
+                    <div><strong>🏷️ Role:</strong> ${admin.role || 'Admin'}</div>
+                    <div><strong>🕐 Days:</strong> ${Math.floor((Date.now() - new Date(admin.signupDate)) / (1000 * 60 * 60 * 24))}</div>
+                  </div>
+                  <div style="margin-top: 15px; text-align: right;">
+                    ${admin.userId !== ADMIN_CREDENTIALS.userId ? `
+                      <button onclick="removeSpecificAdmin('${admin.userId}')" style="background: #ff6b6b; color: white; padding: 8px 15px; border: none; border-radius: 15px; cursor: pointer; margin-left: 10px; font-weight: 600;">
+                        🗑️ Remove
+                      </button>
+                    ` : `
+                      <span style="background: #00b894; color: white; padding: 8px 15px; border-radius: 15px; font-size: 0.9em; font-weight: 600;">
+                        🔒 Main Admin
+                      </span>
+                    `}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            <div style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 15px;">
+              <p><strong>👑 Total Admins:</strong> ${admins.length} | <strong>🔒 Main Admin:</strong> ${ADMIN_CREDENTIALS.userId}</p>
+              <button onclick="addNewAdmin()" style="background: #00b894; color: white; padding: 12px 25px; border: none; border-radius: 20px; cursor: pointer; margin: 10px; font-weight: 600;">➕ Add Admin</button>
+              <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #ff6b6b; color: white; padding: 12px 25px; border: none; border-radius: 20px; cursor: pointer; margin: 10px; font-weight: 600;">✖️ Close</button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    // Helper function to remove specific admin
+    function removeSpecificAdmin(userId) {
+      if (confirm(`⚠️ Are you sure you want to remove admin with User ID: ${userId}?\n\nThis action cannot be undone!`)) {
+        const users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        const adminIndex = users.findIndex(u => u.userId === userId && u.isAdmin);
+        
+        if (adminIndex !== -1) {
+          const removedAdmin = users[adminIndex];
+          users.splice(adminIndex, 1);
+          localStorage.setItem('registeredUsers', JSON.stringify(users));
+          
+          alert(`✅ Admin removed successfully!\n\n👤 ${removedAdmin.name} (${removedAdmin.userId}) is no longer an admin.`);
+          
+          // Close current modal and refresh admin panel
+          document.querySelector('[style*="z-index: 4000"]').remove();
+          updateSystemStats();
+        }
+      }
+    }
+
+    // Admin Quick Login Function
+    function adminQuickLogin() {
+      // Auto-fill admin credentials
+      document.getElementById('loginPhone').value = '9149153015';
+      document.getElementById('loginPassword').value = 'Pradhya677@';
+      
+      // Show login modal
+      showLoginModal();
+      
+      // Show success message
+      setTimeout(() => {
+        alert('👑 Admin credentials filled!\n\nClick "Login & Start Ordering" to access admin panel.\n\n🔐 User ID: PrateekShuprama890\n🔑 Password: Pradhya677@');
+      }, 500);
+    }
+
+    // Initialize cart and meals
+    updateCartCount();
+    loadMeals();
+    
+    // Refresh meals every minute to update availability
+    setInterval(loadMeals, 60000);
+
+    // Order History Functions
+    function showOrderHistory() {
+      const modal = document.getElementById('orderHistoryModal');
+      const content = document.getElementById('orderHistoryContent');
+      
+      modal.style.display = 'block';
+      
+      // Get order history from localStorage
+      const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+      
+      if (orderHistory.length === 0) {
+        content.innerHTML = `
+          <div style="text-align: center; color: white; padding: 40px;">
+            <h3 style="font-size: 1.8em; margin-bottom: 20px;">📝 No Orders Yet</h3>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">You haven't placed any orders yet.</p>
+            <button onclick="closeOrderHistory(); document.getElementById('order').scrollIntoView({behavior: 'smooth'})" 
+                    style="background: linear-gradient(135deg, #feca57, #ff6b6b); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.1em; cursor: pointer; font-weight: 600;">
+              🍛 Place Your First Order
+            </button>
+          </div>
+        `;
+        return;
+      }
+      
+      let historyHTML = '';
+      orderHistory.forEach((order, index) => {
+        const statusColor = order.status === 'New Order' ? '#feca57' : 
+                           order.status === 'Confirmed' ? '#00b894' : 
+                           order.status === 'Delivered' ? '#74b9ff' : '#fd79a8';
+        
+        historyHTML += `
+          <div style="background: rgba(255,255,255,0.1); margin: 20px 0; padding: 25px; border-radius: 15px; border-left: 5px solid ${statusColor};">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap;">
+              <h3 style="color: #feca57; font-size: 1.3em; margin: 0;">Order #${order.orderId}</h3>
+              <span style="background: ${statusColor}; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em; font-weight: 600;">
+                ${order.status}
+              </span>
+            </div>
+            
+            <div style="color: white; line-height: 1.8;">
+              <p><strong>📅 Date:</strong> ${order.timestamp}</p>
+              <p><strong>🍽️ Meal:</strong> ${order.mealPlan}</p>
+              <p><strong>📍 Address:</strong> ${order.address}</p>
+              <p><strong>📱 Phone:</strong> ${order.phone}</p>
+              ${order.duration !== 'Not specified' ? `<p><strong>⏰ Duration:</strong> ${order.duration}</p>` : ''}
+              ${order.deliveryTime !== 'Not specified' ? `<p><strong>🕐 Time:</strong> ${order.deliveryTime}</p>` : ''}
+              ${order.specialRequests !== 'None' ? `<p><strong>📝 Special Requests:</strong> ${order.specialRequests}</p>` : ''}
+            </div>
+            
+            <div style="margin-top: 15px; text-align: right;">
+              <button onclick="reorderItem('${order.orderId}')" 
+                      style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; padding: 8px 20px; border: none; border-radius: 20px; cursor: pointer; font-weight: 600; margin-left: 10px;">
+                🔄 Reorder
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      
+      content.innerHTML = historyHTML;
+    }
+
+    function closeOrderHistory() {
+      document.getElementById('orderHistoryModal').style.display = 'none';
+    }
+
+    function reorderItem(orderId) {
+      const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
+      const order = orderHistory.find(o => o.orderId === orderId);
+      
+      if (order) {
+        // Fill form with previous order data
+        document.getElementById('customerName').value = order.customerName;
+        document.getElementById('phone').value = order.phone;
+        document.getElementById('email').value = order.email !== 'Not provided' ? order.email : '';
+        document.getElementById('address').value = order.address;
+        document.getElementById('mealPlan').value = order.mealPlan;
+        document.getElementById('duration').value = order.duration !== 'Not specified' ? order.duration : '';
+        document.getElementById('deliveryTime').value = order.deliveryTime !== 'Not specified' ? order.deliveryTime : '';
+        document.getElementById('specialRequests').value = order.specialRequests !== 'None' ? order.specialRequests : '';
+        
+        // Close modal and scroll to form
+        closeOrderHistory();
+        document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+        
+        // Show notification
+        alert('🍛 Previous order details filled! Please review and submit.');
+      }
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('orderHistoryModal');
+      if (event.target === modal) {
+        closeOrderHistory();
+      }
+    }
+
+
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'967de35ea43ca763',t:'MTc1Mzk3MzIxNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
