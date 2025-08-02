@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Shuprama Kitchen</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDky00JFeTZ0pVTnLQ-LRE_0Om92ZtLJeo",
+      authDomain: "shuprama-tiffin-f6faf.firebaseapp.com",
+      databaseURL: "https://shuprama-tiffin-f6faf-default-rtdb.firebaseio.com",
+      projectId: "shuprama-tiffin-f6faf",
+      storageBucket: "shuprama-tiffin-f6faf.firebasestorage.app",
+      messagingSenderId: "513826845425",
+      appId: "1:513826845425:web:01119dda2684c74bd3af50",
+      measurementId: "G-ZT4Y0FH30W"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffeb3b, #f44336);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #c62828;
+      margin-bottom: 10px;
+    }
+
+    .toggle {
+      color: #c62828;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+      background: #ffeb3b;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .section {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #c62828;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #e53935;
+    }
+
+    #otp-section {
+      display: none;
+    }
+
+    #message {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .link {
+      font-size: 0.9em;
+      margin-top: 10px;
+      color: #333;
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <img src="https://prateekshukla328.github.io/Shuprama/logo.png" alt="Shuprama Logo" class="logo" />
+    <h2>Login to Shuprama Kitchen</h2>
+
+    <div class="toggle" onclick="toggleMode()">Switch to Sign Up</div>
+
+    <!-- Email Login/Signup -->
+    <div class="section" id="email-section">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Enter Email" />
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter Password" />
+      <div class="link" onclick="resetPassword()">Forgot Password?</div>
+      <button onclick="loginOrSignup()">Login</button>
+    </div>
+
+    <h3 style="margin-top: 20px; color:#c62828;">Or Login with Phone Number</h3>
+    <!-- Phone Login -->
+    <div class="section">
+      <label>Phone Number</label>
+      <input type="tel" id="phone" placeholder="+91XXXXXXXXXX" />
+      <div id="recaptcha-container" style="margin-top: 10px;"></div>
+      <button onclick="sendOTP()">Send OTP</button>
+
+      <div id="otp-section">
+        <input type="text" id="otp" placeholder="Enter OTP" />
+        <button onclick="verifyOTP()">Verify OTP</button>
+      </div>
+    </div>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    let isSignup = false;
+    const auth = firebase.auth();
+
+    function toggleMode() {
+      isSignup = !isSignup;
+      document.querySelector('.toggle').innerText = isSignup ? "Switch to Login" : "Switch to Sign Up";
+      document.querySelector("#email-section button").innerText = isSignup ? "Sign Up" : "Login";
+    }
+
+    function loginOrSignup() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      if (isSignup) {
+        auth.createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            saveSession();
+            window.location.href = "index.html";
+          })
+          .catch(error => alert("Signup Error: " + error.message));
+      } else {
+        auth.signInWithEmailAndPassword(email, password)
+          .then(() => {
+            saveSession();
+            window.location.href = "index.html";
+          })
+          .catch(error => alert("Login Error: " + error.message));
+      }
+    }
+
+    function resetPassword() {
+      const email = document.getElementById("email").value;
+      if (!email) return alert("Enter your email first.");
+      auth.sendPasswordResetEmail(email)
+        .then(() => alert("Password reset link sent to your email."))
+        .catch(error => alert("Error: " + error.message));
+    }
+
+    function sendOTP() {
+      const phoneNumber = document.getElementById("phone").value;
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        size: 'normal'
+      });
+      auth.signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+        .then(confirmResult => {
+          window.confirmationResult = confirmResult;
+          document.getElementById("otp-section").style.display = "block";
+          document.getElementById("message").innerText = "OTP sent!";
+        })
+        .catch(error => alert("OTP Error: " + error.message));
+    }
+
+    function verifyOTP() {
+      const otp = document.getElementById("otp").value;
+      if (window.confirmationResult) {
+        window.confirmationResult.confirm(otp)
+          .then(() => {
+            saveSession();
+            window.location.href = "index.html";
+          })
+          .catch(error => alert("OTP Verification Failed: " + error.message));
+      }
+    }
+
+    function saveSession() {
+      const user = auth.currentUser;
+      if (user) {
+        localStorage.setItem("user", JSON.stringify({
+          uid: user.uid,
+          email: user.email || '',
+          phone: user.phoneNumber || ''
+        }));
+      }
+    }
+  </script>
+</body>
+  </html>
