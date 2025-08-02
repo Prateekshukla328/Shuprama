@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shuprama Subscription Order</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #fff3e0);
+  color: #2d3748;
+  padding: 30px 15px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 500px;
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.9em;
+  color: #5e35b1;
+  margin-bottom: 25px;
+}
+
+.plan {
+  background: #f1f5f9;
+  border-left: 4px solid #5e35b1;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease;
+}
+
+.plan:hover {
+  transform: translateY(-4px);
+}
+
+.plan h3 {
+  color: #3949ab;
+  font-size: 1.2em;
+  margin-bottom: 8px;
+}
+
+.plan p {
+  font-size: 0.95em;
+  color: #555;
+  line-height: 1.5;
+}
+
+.upi-box {
+  background: #fffde7;
+  text-align: center;
+  font-size: 1.05em;
+  font-weight: 600;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  border: 1px dashed #fdd835;
+}
+
+button {
+  background: linear-gradient(135deg, #5e35b1, #7e57c2);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 1em;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(126, 87, 194, 0.3);
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 20px;
+  background: #c8e6c9;
+  color: #2e7d32;
+  border-left: 5px solid #2e7d32;
+  border-radius: 10px;
+  font-size: 0.95em;
+  display: none;
+}
+
+.subscription-id {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding: 25px 20px;
+  }
+  h1 {
+    font-size: 1.6em;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Monthly Subscription Plans</h1><div class="plan">
+  <h3>🍽 Two Time Meal (Lunch + Dinner)</h3>
+  <p>1 Month Subscription: <strong>₹2900</strong><br>
+    Includes: Lunch + Dinner (Daily)<br>
+    Total Meals: 60</p>
+</div>
+
+<div class="plan">
+  <h3>🌞 Full Day Meal (Breakfast + Lunch + Dinner)</h3>
+  <p>1 Month Subscription: <strong>₹4000</strong><br>
+    Includes: Breakfast + Lunch + Dinner (Daily)<br>
+    Total Meals: 90</p>
+</div>
+
+<div class="upi-box">
+  Pay via UPI to: <br><strong>prateekshukla481@okaxis</strong>
+</div>
+
+<button onclick="confirmPayment()">✅ I Have Paid - Confirm Subscription</button>
+
+<div class="success-message" id="successMsg">
+  <strong>Subscription Successful!</strong><br>
+  Your Subscription ID: <span class="subscription-id" id="subId"></span><br>
+  Thank you for choosing Shuprama. Meals start from tomorrow!
+</div>
+
+  </div>  <script>
+    function confirmPayment() {
+      const id = 'SHU-' + Math.floor(Math.random() * 900000 + 100000);
+      document.getElementById('subId').textContent = id;
+      const successBox = document.getElementById('successMsg');
+      successBox.style.display = 'block';
+      successBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script></body>
+</html>
