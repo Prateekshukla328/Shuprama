@@ -77,7 +77,7 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <span class="text-3xl">🍽</span>
+                    <span class="text-3xl">🍽️</span>
                     <h1 class="text-2xl font-bold text-gray-800">Shuprama Kitchen</h1>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -96,7 +96,7 @@
         <!-- Header -->
         <div class="text-center mb-12 slide-up">
             <h1 class="text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                🍽 Shuprama Kitchen Tiffin Services
+                🍽️ Shuprama Kitchen Tiffin Services
             </h1>
             <p class="text-xl text-white opacity-90 drop-shadow">Ghar jaisa khana, restaurant jaisi quality!</p>
             <div class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full inline-block pulse-animation">
@@ -309,7 +309,7 @@
             
             if (planNameElement && planPriceElement) {
                 planNameElement.textContent = planName;
-                planPriceElement.textContent = ₹${price}/month;
+                planPriceElement.textContent = `₹${price}/month`;
             }
             
             // Show subscription form
@@ -345,10 +345,10 @@
             const amount = selectedPlanData.price;
             const upiId = 'prateekshukla481@okaxis';
             const merchantName = 'Shuprama Kitchen';
-            const note = Payment for ${selectedPlanData.name} - Monthly Subscription;
+            const note = `Payment for ${selectedPlanData.name} - Monthly Subscription`;
             
             // Create UPI payment URL
-            const upiUrl = upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)};
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
             
             // Try to open UPI app
             try {
@@ -356,7 +356,7 @@
                 
                 // Show payment processing message
                 setTimeout(() => {
-                    showMessage('success', 💳 Payment of ₹${amount} initiated!\n\nUPI ID: ${upiId}\nAmount: ₹${amount}\n\nPlease complete the payment in your UPI app and then fill the form below.);
+                    showMessage('success', `💳 Payment of ₹${amount} initiated!\n\nUPI ID: ${upiId}\nAmount: ₹${amount}\n\nPlease complete the payment in your UPI app and then fill the form below.`);
                 }, 1000);
             } catch (error) {
                 console.error('UPI payment failed:', error);
