@@ -14,14 +14,7 @@
         
         .gradient-bg {
             background: linear-gradient(135deg, #FFA726 0%, #FF7043 25%, #FFEB3B 50%, #FF5722 75%, #FFC107 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            background-attachment: fixed;
         }
         
         .card-hover {
@@ -69,6 +62,18 @@
         .show {
             display: flex !important;
         }
+        
+        .plan-button {
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        .plan-button:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
 <body class="min-h-screen gradient-bg">
@@ -77,7 +82,7 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <span class="text-3xl">🍽️</span>
+                    <span class="text-3xl">🍽</span>
                     <h1 class="text-2xl font-bold text-gray-800">Shuprama Kitchen</h1>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -96,7 +101,7 @@
         <!-- Header -->
         <div class="text-center mb-12 slide-up">
             <h1 class="text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                🍽️ Shuprama Kitchen Tiffin Services
+                🍽 Shuprama Kitchen Tiffin Services
             </h1>
             <p class="text-xl text-white opacity-90 drop-shadow">Ghar jaisa khana, restaurant jaisi quality!</p>
             <div class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full inline-block pulse-animation">
@@ -136,7 +141,7 @@
                             <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Free delivery</li>
                         </ul>
                         
-                        <button onclick="selectPlan('Lunch + Dinner', 2900)" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <button id="plan1Btn" class="plan-button w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
                             Select This Plan
                         </button>
                     </div>
@@ -169,7 +174,7 @@
                             <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Free delivery</li>
                         </ul>
                         
-                        <button onclick="selectPlan('Breakfast + Dinner', 2650)" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <button id="plan2Btn" class="plan-button w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
                             Select This Plan
                         </button>
                     </div>
@@ -205,7 +210,7 @@
                             <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Priority delivery</li>
                         </ul>
                         
-                        <button onclick="selectPlan('Breakfast + Lunch + Dinner', 4000)" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <button id="plan3Btn" class="plan-button w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
                             Select This Plan
                         </button>
                     </div>
@@ -234,8 +239,8 @@
     </div>
 
     <!-- Payment & Subscription Form (Hidden initially) -->
-    <div id="subscriptionForm" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div id="subscriptionForm" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-md w-full my-8 flex-shrink-0">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-2xl font-bold text-gray-800">Complete Your Subscription</h3>
@@ -297,6 +302,13 @@
     <script>
         let selectedPlanData = {};
 
+        // Plan data
+        const plans = {
+            plan1: { name: 'Lunch + Dinner', price: 2900 },
+            plan2: { name: 'Breakfast + Dinner', price: 2650 },
+            plan3: { name: 'Breakfast + Lunch + Dinner', price: 4000 }
+        };
+
         function selectPlan(planName, price) {
             console.log('Plan selected:', planName, price);
             
@@ -309,8 +321,11 @@
             
             if (planNameElement && planPriceElement) {
                 planNameElement.textContent = planName;
-                planPriceElement.textContent = `₹${price}/month`;
+                planPriceElement.textContent = ₹${price}/month;
             }
+            
+            // Lock body scroll
+            document.body.style.overflow = 'hidden';
             
             // Show subscription form
             const subscriptionForm = document.getElementById('subscriptionForm');
@@ -326,6 +341,9 @@
         }
 
         function closeForm() {
+            // Unlock body scroll
+            document.body.style.overflow = 'auto';
+            
             const subscriptionForm = document.getElementById('subscriptionForm');
             if (subscriptionForm) {
                 subscriptionForm.style.opacity = '0';
@@ -345,10 +363,10 @@
             const amount = selectedPlanData.price;
             const upiId = 'prateekshukla481@okaxis';
             const merchantName = 'Shuprama Kitchen';
-            const note = `Payment for ${selectedPlanData.name} - Monthly Subscription`;
+            const note = Payment for ${selectedPlanData.name} - Monthly Subscription;
             
             // Create UPI payment URL
-            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
+            const upiUrl = upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)};
             
             // Try to open UPI app
             try {
@@ -356,7 +374,7 @@
                 
                 // Show payment processing message
                 setTimeout(() => {
-                    showMessage('success', `💳 Payment of ₹${amount} initiated!\n\nUPI ID: ${upiId}\nAmount: ₹${amount}\n\nPlease complete the payment in your UPI app and then fill the form below.`);
+                    showMessage('success', 💳 Payment of ₹${amount} initiated!\n\nUPI ID: ${upiId}\nAmount: ₹${amount}\n\nPlease complete the payment in your UPI app and then fill the form below.);
                 }, 1000);
             } catch (error) {
                 console.error('UPI payment failed:', error);
@@ -383,10 +401,4 @@
             }
             
             if (!/^[0-9]{10}$/.test(mobile)) {
-                showMessage('error', '❌ Please enter a valid 10-digit mobile number!');
-                return;
-            }
-            
-            // Simulate successful subscription
-            closeForm();
-            showMessage('success', `🎉 Subscription Successful!\n\nThank you ${name}!\n\nYour ${selectedPlanData.name} plan is now active.\n\nWe'll start delivering fresh meals from tomorrow.\n\nFor any queries, call: 6387158928, 6393584047
+                s
