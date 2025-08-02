@@ -82,7 +82,7 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <span class="text-3xl">🍽</span>
+                    <span class="text-3xl">🍽️</span>
                     <h1 class="text-2xl font-bold text-gray-800">Shuprama Kitchen</h1>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -101,7 +101,7 @@
         <!-- Header -->
         <div class="text-center mb-12 slide-up">
             <h1 class="text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                🍽 Shuprama Kitchen Tiffin Services
+                🍽️ Shuprama Kitchen Tiffin Services
             </h1>
             <p class="text-xl text-white opacity-90 drop-shadow">Ghar jaisa khana, restaurant jaisi quality!</p>
             <div class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full inline-block pulse-animation">
@@ -141,7 +141,7 @@
                             <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Free delivery</li>
                         </ul>
                         
-                        <button id="plan1Btn" class="plan-button w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <button onclick="selectPlan('Lunch + Dinner', 2900)" class="plan-button w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
                             Select This Plan
                         </button>
                     </div>
@@ -174,7 +174,7 @@
                             <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Free delivery</li>
                         </ul>
                         
-                        <button id="plan2Btn" class="plan-button w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <button onclick="selectPlan('Breakfast + Dinner', 2650)" class="plan-button w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
                             Select This Plan
                         </button>
                     </div>
@@ -210,7 +210,7 @@
                             <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Priority delivery</li>
                         </ul>
                         
-                        <button id="plan3Btn" class="plan-button w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
+                        <button onclick="selectPlan('Breakfast + Lunch + Dinner', 4000)" class="plan-button w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:scale-105">
                             Select This Plan
                         </button>
                     </div>
@@ -321,7 +321,7 @@
             
             if (planNameElement && planPriceElement) {
                 planNameElement.textContent = planName;
-                planPriceElement.textContent = ₹${price}/month;
+                planPriceElement.textContent = `₹${price}/month`;
             }
             
             // Lock body scroll
@@ -363,10 +363,10 @@
             const amount = selectedPlanData.price;
             const upiId = 'prateekshukla481@okaxis';
             const merchantName = 'Shuprama Kitchen';
-            const note = Payment for ${selectedPlanData.name} - Monthly Subscription;
+            const note = `Payment for ${selectedPlanData.name} - Monthly Subscription`;
             
             // Create UPI payment URL
-            const upiUrl = upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)};
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
             
             // Try to open UPI app
             try {
@@ -374,7 +374,7 @@
                 
                 // Show payment processing message
                 setTimeout(() => {
-                    showMessage('success', 💳 Payment of ₹${amount} initiated!\n\nUPI ID: ${upiId}\nAmount: ₹${amount}\n\nPlease complete the payment in your UPI app and then fill the form below.);
+                    showMessage('success', `💳 Payment of ₹${amount} initiated!\n\nUPI ID: ${upiId}\nAmount: ₹${amount}\n\nPlease complete the payment in your UPI app and then fill the form below.`);
                 }, 1000);
             } catch (error) {
                 console.error('UPI payment failed:', error);
@@ -401,4 +401,112 @@
             }
             
             if (!/^[0-9]{10}$/.test(mobile)) {
-                s
+                showMessage('error', '❌ Please enter a valid 10-digit mobile number!');
+                return;
+            }
+            
+            // Simulate successful subscription
+            closeForm();
+            setTimeout(() => {
+                showMessage('success', `🎉 Subscription Successful!\n\nThank you ${name}!\n\nYour ${selectedPlanData.name} plan is now active.\n\nWe'll start delivering fresh meals from tomorrow.\n\nFor any queries, call: 6387158928`);
+            }, 400);
+            
+            // Reset form
+            document.getElementById('detailsForm').reset();
+        });
+
+        function showMessage(type, message) {
+            // Lock body scroll
+            document.body.style.overflow = 'hidden';
+            
+            const messageContent = document.getElementById('messageContent');
+            
+            if (type === 'success') {
+                messageContent.innerHTML = `
+                    <div class="text-green-600 text-6xl mb-4">✅</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Success!</h3>
+                    <p class="text-gray-700 whitespace-pre-line">${message}</p>
+                `;
+            } else if (type === 'error') {
+                messageContent.innerHTML = `
+                    <div class="text-red-600 text-6xl mb-4">❌</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Error!</h3>
+                    <p class="text-gray-700 whitespace-pre-line">${message}</p>
+                `;
+            } else {
+                messageContent.innerHTML = `
+                    <div class="text-blue-600 text-6xl mb-4">ℹ️</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Information</h3>
+                    <p class="text-gray-700 whitespace-pre-line">${message}</p>
+                `;
+            }
+            
+            document.getElementById('messageModal').classList.remove('hidden');
+        }
+
+        function closeMessage() {
+            // Unlock body scroll
+            document.body.style.overflow = 'auto';
+            document.getElementById('messageModal').classList.add('hidden');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded successfully');
+            
+            // Add touch event support for mobile
+            const planButtons = document.querySelectorAll('.plan-button');
+            planButtons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+            
+            // Animate cards on scroll
+            const cards = document.querySelectorAll('.card-hover');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = Math.random() * 0.5 + 's';
+                        entry.target.classList.add('bounce-in');
+                    }
+                });
+            });
+            
+            cards.forEach(card => observer.observe(card));
+        });
+
+        // Close modal on outside click
+        document.addEventListener('click', function(e) {
+            const subscriptionForm = document.getElementById('subscriptionForm');
+            const messageModal = document.getElementById('messageModal');
+            
+            if (e.target === subscriptionForm) {
+                closeForm();
+            }
+            
+            if (e.target === messageModal) {
+                closeMessage();
+            }
+        });
+
+        // Escape key to close modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const subscriptionForm = document.getElementById('subscriptionForm');
+                const messageModal = document.getElementById('messageModal');
+                
+                if (!subscriptionForm.classList.contains('hidden')) {
+                    closeForm();
+                } else if (!messageModal.classList.contains('hidden')) {
+                    closeMessage();
+                }
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9691702ca46f85cb',t:'MTc1NDE3ODIxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
