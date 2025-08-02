@@ -2,161 +2,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shuprama Subscription Order</title>
+  <title>Shuprama Subscription Offer</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #e0f7fa, #fff3e0);
-  color: #2d3748;
-  padding: 30px 15px;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.container {
-  max-width: 500px;
-  background: #ffffff;
-  padding: 30px 25px;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
-  animation: fadeIn 0.8s ease forwards;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-h1 {
-  text-align: center;
-  font-size: 1.9em;
-  color: #5e35b1;
-  margin-bottom: 25px;
-}
-
-.plan {
-  background: #f1f5f9;
-  border-left: 4px solid #5e35b1;
-  border-radius: 12px;
-  padding: 15px 20px;
-  margin-bottom: 20px;
-  transition: transform 0.2s ease;
-}
-
-.plan:hover {
-  transform: translateY(-4px);
-}
-
-.plan h3 {
-  color: #3949ab;
-  font-size: 1.2em;
-  margin-bottom: 8px;
-}
-
-.plan p {
-  font-size: 0.95em;
-  color: #555;
-  line-height: 1.5;
-}
-
-.upi-box {
-  background: #fffde7;
-  text-align: center;
-  font-size: 1.05em;
-  font-weight: 600;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 15px;
-  border: 1px dashed #fdd835;
-}
-
-button {
-  background: linear-gradient(135deg, #5e35b1, #7e57c2);
-  color: white;
-  border: none;
-  padding: 14px;
-  font-size: 1em;
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 25px rgba(126, 87, 194, 0.3);
-}
-
-.success-message {
-  margin-top: 20px;
-  padding: 20px;
-  background: #c8e6c9;
-  color: #2e7d32;
-  border-left: 5px solid #2e7d32;
-  border-radius: 10px;
-  font-size: 0.95em;
-  display: none;
-}
-
-.subscription-id {
-  font-weight: bold;
-}
-
-@media screen and (max-width: 600px) {
-  .container {
-    padding: 25px 20px;
-  }
-  h1 {
-    font-size: 1.6em;
-  }
-}
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #fffde7);
+      padding: 30px 15px;
+      color: #2d3748;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      max-width: 500px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #6a1b9a;
+      font-size: 1.6em;
+      margin-bottom: 20px;
+    }
+    .plan {
+      padding: 12px 15px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+    .plan:hover { border-color: #6a1b9a; }
+    .plan.selected {
+      background: #f3e5f5;
+      border-color: #6a1b9a;
+    }
+    label { display: block; margin: 12px 0 6px; font-weight: 500; }
+    input[type="text"], input[type="tel"] {
+      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 10px;
+    }
+    button {
+      background: linear-gradient(135deg, #6a1b9a, #ab47bc);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      width: 100%;
+      font-size: 1em;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    .upi-link {
+      margin-top: 20px;
+      display: none;
+      text-align: center;
+    }
+    .upi-link a {
+      color: #2e7d32;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .upi-link a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Monthly Subscription Plans</h1><div class="plan">
-  <h3>🍽 Two Time Meal (Lunch + Dinner)</h3>
-  <p>1 Month Subscription: <strong>₹2900</strong><br>
-    Includes: Lunch + Dinner (Daily)<br>
-    Total Meals: 60</p>
+    <h1>🎁 Rakshabandhan Special</h1><div class="plan" onclick="selectPlan(this, 2900)">
+  <strong>🍽 2-Time Meal</strong> — <del>₹3000</del> ₹2900
 </div>
 
-<div class="plan">
-  <h3>🌞 Full Day Meal (Breakfast + Lunch + Dinner)</h3>
-  <p>1 Month Subscription: <strong>₹4000</strong><br>
-    Includes: Breakfast + Lunch + Dinner (Daily)<br>
-    Total Meals: 90</p>
+<div class="plan" onclick="selectPlan(this, 4000)">
+  <strong>🌞 Full Day Meal</strong> — <del>₹4200</del> ₹4000
 </div>
 
-<div class="upi-box">
-  Pay via UPI to: <br><strong>prateekshukla481@okaxis</strong>
-</div>
+<label for="name">Your Name</label>
+<input type="text" id="name" placeholder="Enter full name" />
 
-<button onclick="confirmPayment()">✅ I Have Paid - Confirm Subscription</button>
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" placeholder="10-digit mobile number" />
 
-<div class="success-message" id="successMsg">
-  <strong>Subscription Successful!</strong><br>
-  Your Subscription ID: <span class="subscription-id" id="subId"></span><br>
-  Thank you for choosing Shuprama. Meals start from tomorrow!
+<button onclick="payNow()">🔐 Pay Now</button>
+
+<div class="upi-link" id="upiBox">
+  Redirecting... If not, <a id="upiLink" href="#" target="_blank">click here to pay</a>
 </div>
 
   </div>  <script>
-    function confirmPayment() {
-      const id = 'SHU-' + Math.floor(Math.random() * 900000 + 100000);
-      document.getElementById('subId').textContent = id;
-      const successBox = document.getElementById('successMsg');
-      successBox.style.display = 'block';
-      successBox.scrollIntoView({ behavior: 'smooth' });
+    let selectedAmount = 0;
+    function selectPlan(el, amount) {
+      document.querySelectorAll('.plan').forEach(p => p.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedAmount = amount;
+    }
+
+    function payNow() {
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const upi = "prateekshukla481@okaxis";
+
+      if (!selectedAmount) return alert("Please select a plan.");
+      if (!name || !phone) return alert("Please fill in your name and phone number.");
+
+      const upiUrl = upi://pay?pa=${upi}&pn=Shuprama&am=${selectedAmount}&cu=INR&tn=Shuprama Subscription;
+      document.getElementById("upiLink").href = upiUrl;
+      document.getElementById("upiBox").style.display = 'block';
+      window.location.href = upiUrl;
     }
   </script></body>
 </html>
