@@ -22,46 +22,211 @@
   </script>
 
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #ffeb3b, #f44336);
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&display=swap');
+    
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff, #5f27cd, #ff3838);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(254, 202, 87, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(255, 159, 243, 0.2) 0%, transparent 50%);
+      animation: floatingBubbles 20s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes floatingBubbles {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-30px) rotate(120deg); }
+      66% { transform: translateY(30px) rotate(240deg); }
     }
 
     .container {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
-      width: 90%;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      padding: 50px;
+      border-radius: 30px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 
+                  0 0 0 1px rgba(255, 255, 255, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      max-width: 450px;
+      width: 100%;
       text-align: center;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      z-index: 10;
+      animation: containerFloat 6s ease-in-out infinite, containerGlow 4s ease-in-out infinite alternate;
+      transform-style: preserve-3d;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff);
+      border-radius: 32px;
+      z-index: -1;
+      animation: borderGlow 3s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes containerFloat {
+      0%, 100% { transform: translateY(0px) rotateX(0deg); }
+      50% { transform: translateY(-10px) rotateX(2deg); }
+    }
+
+    @keyframes containerGlow {
+      0% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 0 30px rgba(255, 107, 107, 0.3); }
+      100% { box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 0 50px rgba(254, 202, 87, 0.4); }
+    }
+
+    @keyframes borderGlow {
+      0% { background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff); }
+      25% { background: linear-gradient(45deg, #feca57, #ff9ff3, #54a0ff, #ff6b6b); }
+      50% { background: linear-gradient(45deg, #ff9ff3, #54a0ff, #ff6b6b, #feca57); }
+      75% { background: linear-gradient(45deg, #54a0ff, #ff6b6b, #feca57, #ff9ff3); }
+      100% { background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff); }
     }
 
     .logo {
-      width: 100px;
+      width: 90px;
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
+      border-radius: 50%;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 107, 107, 0.3);
+      animation: logoSpin 8s linear infinite, logoPulse 2s ease-in-out infinite alternate;
+      transition: all 0.3s ease;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .logo:hover {
+      transform: scale(1.1) rotate(360deg);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 30px rgba(254, 202, 87, 0.5);
+    }
+
+    @keyframes logoSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes logoPulse {
+      0% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 107, 107, 0.3); }
+      100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 30px rgba(254, 202, 87, 0.5); }
     }
 
     h2 {
-      color: #c62828;
-      margin-bottom: 10px;
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(45deg, #ff6b6b, #feca57, #ff9ff3);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+      font-size: 36px;
+      font-weight: 700;
+      animation: textGradient 3s ease-in-out infinite, textFloat 4s ease-in-out infinite;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 35px;
+      font-size: 16px;
+      font-weight: 400;
+      animation: subtitleFade 2s ease-in-out infinite alternate;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes textGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes textFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+    }
+
+    @keyframes subtitleFade {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
     }
 
     .toggle {
-      color: #c62828;
-      font-weight: bold;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
       cursor: pointer;
-      margin-bottom: 20px;
-      background: #ffeb3b;
-      padding: 10px;
-      border-radius: 8px;
+      margin-bottom: 35px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(254, 202, 87, 0.2));
+      padding: 14px 28px;
+      border-radius: 25px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: inline-block;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      animation: togglePulse 3s ease-in-out infinite;
+    }
+
+    .toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .toggle:hover::before {
+      left: 100%;
+    }
+
+    .toggle:hover {
+      background: linear-gradient(135deg, #ff6b6b, #feca57);
+      color: white;
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    @keyframes togglePulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(254, 202, 87, 0.4); }
     }
 
     .section {
@@ -69,47 +234,215 @@
       text-align: left;
     }
 
+    label {
+      display: block;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 14px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      animation: labelGlow 2s ease-in-out infinite alternate;
+    }
+
     input {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 18px;
+      border-radius: 15px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      font-size: 16px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: rgba(255, 255, 255, 0.9);
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: rgba(255, 107, 107, 0.8);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.2), 0 8px 25px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    input:hover {
+      border-color: rgba(254, 202, 87, 0.6);
+      transform: translateY(-1px);
+    }
+
+    @keyframes labelGlow {
+      0% { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); }
+      100% { text-shadow: 0 2px 8px rgba(255, 107, 107, 0.3); }
     }
 
     button {
       width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      background: #c62828;
+      padding: 18px;
+      margin-top: 25px;
+      background: linear-gradient(135deg, #ff6b6b, #feca57, #ff9ff3);
+      background-size: 200% 200%;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 20px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      animation: buttonGradient 3s ease-in-out infinite;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s;
+    }
+
+    button:hover::before {
+      left: 100%;
     }
 
     button:hover {
-      background: #e53935;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+      background-position: 100% 0;
+    }
+
+    button:active {
+      transform: translateY(-2px) scale(0.98);
+      transition: all 0.1s ease;
+    }
+
+    @keyframes buttonGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .link {
+      font-size: 14px;
+      margin-top: 12px;
+      color: #667eea;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: right;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .link:hover {
+      color: #764ba2;
+      text-decoration: underline;
+    }
+
+    .phone-toggle {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .phone-toggle-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 12px 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      margin: 0;
+      width: auto;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      animation: phoneTogglePulse 4s ease-in-out infinite;
+    }
+
+    .phone-toggle-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .phone-toggle-btn:hover::before {
+      left: 100%;
+    }
+
+    .phone-toggle-btn:hover {
+      border-color: rgba(255, 107, 107, 0.8);
+      color: white;
+      background: rgba(255, 107, 107, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    @keyframes phoneTogglePulse {
+      0%, 100% { border-color: rgba(255, 255, 255, 0.3); }
+      50% { border-color: rgba(254, 202, 87, 0.5); }
+    }
+
+    .phone-section {
+      display: none;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .phone-section.active {
+      display: block;
     }
 
     #otp-section {
       display: none;
+      margin-top: 20px;
     }
 
     #message {
-      color: green;
-      font-weight: bold;
-      margin-top: 10px;
+      color: #48bb78;
+      font-weight: 600;
+      margin-top: 15px;
+      padding: 12px;
+      background: rgba(72, 187, 120, 0.1);
+      border-radius: 8px;
+      border-left: 4px solid #48bb78;
     }
 
-    .link {
-      font-size: 0.9em;
-      margin-top: 10px;
-      color: #333;
-      cursor: pointer;
-      text-decoration: underline;
-      text-align: right;
+    #recaptcha-container {
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+      
+      h2 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
@@ -117,31 +450,39 @@
 <body>
   <div class="container">
     <img src="https://prateekshukla328.github.io/Shuprama/logo.png" alt="Shuprama Logo" class="logo" />
-    <h2>Login to Shuprama Kitchen</h2>
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Sign in to your Shuprama Kitchen account</p>
 
     <div class="toggle" onclick="toggleMode()">Switch to Sign Up</div>
 
     <!-- Email Login/Signup -->
     <div class="section" id="email-section">
-      <label>Email</label>
-      <input type="email" id="email" placeholder="Enter Email" />
+      <label>Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" />
       <label>Password</label>
-      <input type="password" id="password" placeholder="Enter Password" />
+      <input type="password" id="password" placeholder="Enter your password" />
       <div class="link" onclick="resetPassword()">Forgot Password?</div>
       <button onclick="loginOrSignup()">Login</button>
     </div>
 
-    <h3 style="margin-top: 20px; color:#c62828;">Or Login with Phone Number</h3>
-    <!-- Phone Login -->
-    <div class="section">
-      <label>Phone Number</label>
-      <input type="tel" id="phone" placeholder="+91XXXXXXXXXX" />
-      <div id="recaptcha-container" style="margin-top: 10px;"></div>
-      <button onclick="sendOTP()">Send OTP</button>
+    <!-- Phone Login Toggle -->
+    <div class="phone-toggle">
+      <button class="phone-toggle-btn" onclick="togglePhoneSection()">Login with Phone Number</button>
+    </div>
 
-      <div id="otp-section">
-        <input type="text" id="otp" placeholder="Enter OTP" />
-        <button onclick="verifyOTP()">Verify OTP</button>
+    <!-- Phone Login Section (Hidden by default) -->
+    <div class="phone-section" id="phone-section">
+      <div class="section">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="+91XXXXXXXXXX" />
+        <div id="recaptcha-container"></div>
+        <button onclick="sendOTP()">Send OTP</button>
+
+        <div id="otp-section">
+          <label>Enter OTP</label>
+          <input type="text" id="otp" placeholder="Enter 6-digit OTP" />
+          <button onclick="verifyOTP()">Verify OTP</button>
+        </div>
       </div>
     </div>
 
@@ -156,6 +497,21 @@
       isSignup = !isSignup;
       document.querySelector('.toggle').innerText = isSignup ? "Switch to Login" : "Switch to Sign Up";
       document.querySelector("#email-section button").innerText = isSignup ? "Sign Up" : "Login";
+      document.querySelector('h2').innerText = isSignup ? "Create Account" : "Welcome Back";
+      document.querySelector('.subtitle').innerText = isSignup ? "Join Shuprama Kitchen today" : "Sign in to your Shuprama Kitchen account";
+    }
+
+    function togglePhoneSection() {
+      const phoneSection = document.getElementById('phone-section');
+      const toggleBtn = document.querySelector('.phone-toggle-btn');
+      
+      if (phoneSection.classList.contains('active')) {
+        phoneSection.classList.remove('active');
+        toggleBtn.innerText = 'Login with Phone Number';
+      } else {
+        phoneSection.classList.add('active');
+        toggleBtn.innerText = 'Hide Phone Login';
+      }
     }
 
     function loginOrSignup() {
@@ -196,7 +552,7 @@
         .then(confirmResult => {
           window.confirmationResult = confirmResult;
           document.getElementById("otp-section").style.display = "block";
-          document.getElementById("message").innerText = "OTP sent!";
+          document.getElementById("message").innerText = "OTP sent successfully!";
         })
         .catch(error => alert("OTP Error: " + error.message));
     }
@@ -224,5 +580,5 @@
       }
     }
   </script>
-</body>
-  </html>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'968d2cf903454850',t:'MTc1NDEzMzUxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
