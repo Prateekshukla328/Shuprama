@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +5,16 @@
   <title>Shuprama - Tiffin Service</title>
 <!-- ✅ Login Check Script -->
 <script>
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user || (!user.phone && !user.email)) {
-    window.location.href = "login.html";
+  try {
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    if (!user || (!user.phone && !user.email)) {
+      // Only redirect if login.html exists, otherwise continue loading
+      fetch('login.html', {method: 'HEAD'})
+        .then(() => window.location.href = "login.html")
+        .catch(() => console.log("Login page not found, continuing..."));
+    }
+  } catch(e) {
+    console.log("Login check failed, continuing...");
   }
 </script>
 
@@ -39,83 +45,301 @@
 </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Calibri&display=swap');
-    body {
-      font-family: 'Calibri', sans-serif;
-      background-color: #fff700;
-      color: #b00000;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
       margin: 0;
       padding: 0;
-      font-size: 18px;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ff9ff3 100%);
+      background-attachment: fixed;
+      color: #2d3748;
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
     header {
-      background: linear-gradient(to right, #f12711, #f5af19);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      padding: 20px;
+      padding: 40px 20px;
       text-align: center;
-      font-family: Impact, sans-serif;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
     }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
     header img {
-      width: 160px;
-      margin: 10px auto;
+      width: 120px;
+      height: 120px;
+      margin: 10px auto 20px;
       display: block;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
+
+    header img:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+
     h1 {
-      margin: 10px 0;
-      font-size: 2.5em;
+      margin: 20px 0;
+      font-size: 3em;
+      font-weight: 800;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(45deg, #fff, #f0f8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
+
     .section {
-      padding: 20px;
-      margin: 20px auto;
-      background: #ffffff;
-      border-radius: 15px;
-      max-width: 800px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 40px 30px;
+      margin: 30px auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      max-width: 900px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .section:hover::before {
+      left: 100%;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    }
+
+    .section h2 {
+      color: #4a5568;
+      font-size: 2.2em;
+      font-weight: 700;
+      margin-bottom: 25px;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* About Shuprama Section */
+    .about-section {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      border-left: 5px solid #667eea;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .about-card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      border-top: 4px solid #667eea;
+    }
+
+    .about-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .about-card h3 {
+      color: #667eea;
+      font-size: 1.4em;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-card p {
+      color: #4a5568;
+      line-height: 1.8;
+    }
+
     iframe {
       width: 100%;
       height: 600px;
       border: none;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     }
+
     .qr-img, .whatsapp-img {
       display: block;
       margin: 20px auto;
       max-width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
     }
+
+    .qr-img:hover, .whatsapp-img:hover {
+      transform: scale(1.05);
+    }
+
     ul {
       list-style: none;
       padding: 0;
     }
+
     li {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 12px;
+      border-left: 4px solid #667eea;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
     }
+
+    li:hover {
+      transform: translateX(5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    li strong {
+      color: #667eea;
+      font-size: 1.1em;
+    }
+
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 40px 20px;
       font-size: 16px;
-      background: #f5af19;
+      background: linear-gradient(135deg, #667eea, #764ba2);
       color: #fff;
+      margin-top: 50px;
+      box-shadow: 0 -8px 32px rgba(0,0,0,0.1);
+    }
+
+    .thank-you-section {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(254, 202, 87, 0.1));
+    }
+
+    .thank-you-btn {
+      background: linear-gradient(135deg, #ff6b6b, #feca57);
+      color: white;
+      padding: 18px 35px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+      transition: all 0.3s ease;
+      font-size: 1.1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .thank-you-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+      
+      header {
+        padding: 30px 15px;
+      }
+      
+      h1 {
+        font-size: 2.2em;
+      }
+      
+      .section {
+        margin: 20px 15px;
+        padding: 25px 20px;
+      }
+      
+      .section h2 {
+        font-size: 1.8em;
+      }
+      
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
     }
   </style>
-</head>
-<body>
 
-
-<!-- ☰ Hamburger menu -->
+<!-- ☰ Enhanced Hamburger menu -->
 <style>
   #hamburger {
     position: fixed;
-    top: 15px;
-    left: 15px;
-    font-size: 30px;
+    top: 20px;
+    left: 20px;
+    font-size: 28px;
     cursor: pointer;
     z-index: 1001;
-    color: #b00000;
-    background: #fff;
-    border-radius: 6px;
-    padding: 5px 10px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    color: #667eea;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 12px 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(102, 126, 234, 0.2);
   }
+
+  #hamburger:hover {
+    transform: scale(1.1);
+    background: #667eea;
+    color: white;
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
+  }
+
   #sidebar {
     height: 100%;
     width: 0;
@@ -123,126 +347,284 @@
     z-index: 1000;
     top: 0;
     left: 0;
-    background-color: white;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.95));
+    backdrop-filter: blur(20px);
     overflow-x: hidden;
-    transition: 0.3s;
-    padding-top: 60px;
-    box-shadow: 2px 0 6px rgba(0,0,0,0.2);
+    transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding-top: 80px;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(102, 126, 234, 0.1);
   }
-  #sidebar a, #sidebar .contact-box {
-    padding: 12px 24px;
+
+  #sidebar a, #sidebar .contact-box, #sidebar .menu-item {
+    padding: 18px 30px;
     text-decoration: none;
     font-size: 18px;
-    color: #b00000;
-    display: block;
-    transition: 0.2s;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-weight: 500;
   }
-  #sidebar a:hover {
-    background-color: #f0f0f0;
+
+  #sidebar a:hover, #sidebar .menu-item:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    transform: translateX(10px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
   }
+
+  #sidebar .menu-icon {
+    font-size: 24px;
+    width: 30px;
+    text-align: center;
+  }
+
   #sidebar .contact-box {
-    background: #fff0e0;
-    border-radius: 8px;
-    margin: 10px;
-    padding: 10px 15px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-radius: 15px;
+    margin: 20px;
+    padding: 20px;
     font-size: 16px;
-    line-height: 1.6em;
+    line-height: 1.8;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+
+  .logout-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e) !important;
+    color: white !important;
+    margin: 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .logout-btn:hover {
+    background: linear-gradient(135deg, #ff5252, #ff7979) !important;
+    transform: translateX(0) !important;
+  }
+
+  .dashboard-btn {
+    background: linear-gradient(135deg, #48bb78, #38a169) !important;
+    color: white !important;
+    margin: 20px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+
+  .dashboard-btn:hover {
+    background: linear-gradient(135deg, #38a169, #2f855a) !important;
+    transform: translateX(0) !important;
   }
 </style>
 
 <div id="hamburger" onclick="toggleSidebar()">☰</div>
 <div id="sidebar">
-  <a href="https://drive.google.com/file/d/10zu3FGCTuWtg_A8HD1n5n9t8LYKBLgaB/view?usp=drivesdk" target="_blank">📄 View Menu</a>
-  <a href="order-history.html">📦 Order History</a>
+  <a href="https://drive.google.com/file/d/10zu3FGCTuWtg_A8HD1n5n9t8LYKBLgaB/view?usp=drivesdk" target="_blank">
+    <span class="menu-icon">📄</span> View Full Menu
+  </a>
+  <a href="javascript:void(0)" onclick="goToOrderHistory()">
+    <span class="menu-icon">📦</span> Order History
+  </a>
+  <a href="javascript:void(0)" onclick="goToDashboard()" class="dashboard-btn">
+    <span class="menu-icon">📊</span> Go to Dashboard
+  </a>
+  <div class="menu-item logout-btn" onclick="logout()">
+    <span class="menu-icon">🚪</span> Logout
+  </div>
   <div class="contact-box">
-    <strong>📍 Address:</strong><br>
-    Gully No.-7, Nakatiya,Bareilly,UP,243123<br><br>
-    <strong>📞 Phone:</strong><br>
-    9149153015, 9198200758
+    <strong style="color: #667eea; font-size: 18px;">📍 Our Location</strong><br>
+    Gully No.-7, Nakatiya, Bareilly, UP, 243123<br><br>
+    <strong style="color: #667eea; font-size: 18px;">📞 Contact Us</strong><br>
+    9149153015, 9198200758<br><br>
+    <strong style="color: #667eea; font-size: 18px;">⏰ Service Hours</strong><br>
+    Mon-Sun: 7:00 AM - 9:00 PM
   </div>
 </div>
 
 <script>
 function toggleSidebar() {
   var sidebar = document.getElementById("sidebar");
-  sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+  if (sidebar.style.width === "300px") {
+    sidebar.style.width = "0";
+  } else {
+    sidebar.style.width = "300px";
+  }
 }
+
+function goToOrderHistory() {
+  // Check if order-history.html exists before redirecting
+  fetch('order-history.html', {method: 'HEAD'})
+    .then(() => window.location.href = "order-history.html")
+    .catch(() => alert("Order History page is not available yet. Coming soon!"));
+}
+
+function goToFeedback() {
+  // Check if thankyou.html exists before redirecting
+  fetch('thankyou.html', {method: 'HEAD'})
+    .then(() => window.location.href = "thankyou.html")
+    .catch(() => alert("Feedback page is not available yet. You can contact us via WhatsApp!"));
+}
+
+function goToDashboard() {
+  // Check if dashboard.html exists before redirecting
+  fetch('dashboard.html', {method: 'HEAD'})
+    .then(() => window.location.href = "dashboard.html")
+    .catch(() => alert("Dashboard page is not available yet. Coming soon!"));
+}
+
+function logout() {
+  if (confirm("Are you sure you want to logout?")) {
+    localStorage.removeItem("user");
+    // Check if login.html exists before redirecting
+    fetch('login.html', {method: 'HEAD'})
+      .then(() => window.location.href = "login.html")
+      .catch(() => {
+        alert("Logged out successfully!");
+        window.location.reload();
+      });
+  }
+}
+
+// Close sidebar when clicking outside
+document.addEventListener('click', function(event) {
+  var sidebar = document.getElementById("sidebar");
+  var hamburger = document.getElementById("hamburger");
+  
+  if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+    sidebar.style.width = "0";
+  }
+});
 </script>
 
-
+</head>
+<body>
 
 <header>
   <img src="https://i.ibb.co/NgzxL55T/logo-txt.png" alt="Shuprama Logo" />
   <h1>Shuprama Tiffin Service</h1>
+  <p style="font-size: 1.2em; margin-top: 10px; opacity: 0.9;">Fresh • Hygienic • Affordable</p>
 </header>
 
+
+
 <div class="section" id="menu-section">
-  <h2>Today's Menu</h2>
+  <h2>Today's Special Menu</h2>
   <ul id="menu-list">
-    <li>Loading...</li>
+    <li>Loading delicious menu...</li>
   </ul>
 </div>
 
 <div class="section">
   <h2>Order Now</h2>
+  <p style="text-align: center; margin-bottom: 20px; color: #4a5568;">
+    Fill out our simple order form and get fresh meals delivered to your doorstep
+  </p>
   <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfGSeKPuSacx2NQa_8zDjCSPtoer6l3YNVvbIH61azTswAk_Q/viewform?embedded=true"></iframe>
 </div>
 
 <div class="section">
-  <h2>Payment QR</h2>
-  <a href="upi://pay?pa=prateekshukla388@naviaxis&pn=Shuprama%20Kitchen" target="_blank"><img class="qr-img" src="https://i.ibb.co/B5XzFwzH/payment-qr-txt-1.png" alt="QR Code" /></a>
+  <h2>Quick Payment</h2>
+  <p style="text-align: center; margin-bottom: 20px; color: #4a5568;">
+    Scan QR code or click to pay instantly via UPI
+  </p>
+  <a href="upi://pay?pa=prateekshukla481@okaxis&pn=Shuprama%20Kitchen" target="_blank">
+    <img class="qr-img" src="https://i.ibb.co/B5XzFwzH/payment-qr-txt-1.png" alt="Payment QR Code" />
+  </a>
 </div>
 
 <div class="section">
-  <h2>Order by WhatsApp</h2>
+  <h2>Order via WhatsApp</h2>
+  <p style="text-align: center; margin-bottom: 20px; color: #4a5568;">
+    Chat with us directly for instant orders and queries
+  </p>
   <a href="https://wa.me/916387158928" target="_blank">
     <img class="whatsapp-img" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
   </a>
 </div>
 
-<div class="section" style="text-align:center;">
-  <a href="thankyou.html" style="background-color:#b00000;color:white;padding:15px 25px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;margin-bottom:10px;">Thank You</a><br>
+<div class="section thank-you-section">
+  <h2>We Value Your Feedback</h2>
+  <p style="text-align: center; margin-bottom: 30px; color: #4a5568;">
+    Your satisfaction is our priority. Share your experience with us!
+  </p>
+  <a href="javascript:void(0)" onclick="goToFeedback()" class="thank-you-btn">Share Feedback</a>
+</div>
+
+<!-- About Shuprama Section -->
+<div class="section about-section">
+  <h2>About Shuprama Kitchen</h2>
+  <p style="text-align: center; font-size: 1.1em; color: #4a5568; margin-bottom: 30px;">
+    Professional tiffin services launched in 2025, specially designed for students and working professionals in Bareilly
+  </p>
   
+  <div class="about-content">
+    <div class="about-card">
+      <h3><span style="font-size: 1.5em;">🎯</span> Our Vision</h3>
+      <p>Launched in 2025 with a clear mission to serve quality, affordable meals to students and professionals who need reliable food solutions in their busy lives.</p>
+    </div>
+    
+    <div class="about-card">
+      <h3><span style="font-size: 1.5em;">🍽️</span> What We Offer</h3>
+      <p>Fresh homestyle meals prepared daily with hygienic standards. Student-friendly pricing with variety in menu to suit different tastes and dietary preferences.</p>
+    </div>
+    
+    <div class="about-card">
+      <h3><span style="font-size: 1.5em;">⭐</span> Our Commitment</h3>
+      <p>Quality ingredients, timely delivery, and consistent taste. We understand the importance of good nutrition for academic and professional success.</p>
+    </div>
+    
+    <div class="about-card">
+      <h3><span style="font-size: 1.5em;">📍</span> Serving Bareilly</h3>
+      <p>Located in Nakatiya, Bareilly, we're strategically positioned to serve students and professionals across the city with fresh, affordable tiffin services.</p>
+    </div>
+  </div>
 </div>
 
 <footer>
-  © All rights reserved by Shuprama India
+  <p style="font-size: 1.1em; margin-bottom: 10px;">🍽️ Shuprama Kitchen - Serving Happiness Since 2025</p>
+  <p>© All rights reserved by Shuprama India</p>
+  <p style="margin-top: 10px; opacity: 0.8;">Made with ❤️ for food lovers in Bareilly</p>
 </footer>
 
 <script>
   const menu = {
     Monday: {
-      Breakfast: "Poha + Chai + 4 Toast ₹40",
+      Breakfast: "5 Paratha+ Dry Vegetable Curry ₹40",
       Lunch: "Mix veg pulao + dahi + salad ₹50",
       Dinner: "Rajma/Chhole + 4 Roti + Chawal + Raita ₹50"
     },
     Tuesday: {
-      Breakfast: "Halwa + Chana + Chai ₹40",
+      Breakfast: "5 Paratha+ Dry Vegetable Curry ₹40",
       Lunch: "Chane ki ghugni + 2 Paratha + Achar ₹50",
       Dinner: "Arhar Daal + 4 Roti + Chawal + Sabji ₹50"
     },
     Wednesday: {
-      Breakfast: "Daliya + Fried Aloo + Chai ₹40",
+      Breakfast: "5 Paratha+ Dry Vegetable Curry ₹40",
       Lunch: "Vegetable khichdi + Papad ₹50",
       Dinner: "Soyabean + 4 Roti + Chawal + Raita ₹50"
     },
     Thursday: {
-      Breakfast: "Roti/Paratha + Sabji + Chai ₹40",
+      Breakfast: "5 Paratha+ Dry Vegetable Curry ₹40",
       Lunch: "Soya chunks curry + 4 Roti + Salad ₹50",
       Dinner: "Moong/Masoor + 4 Roti + Chawal + Sabji ₹50"
     },
     Friday: {
-      Breakfast: "Dosa + Chai + Tomato Sauce ₹40",
+      Breakfast: "5 Paratha+ Dry Vegetable Curry ₹40",
       Lunch: "Besan ki Kadhi + 4 Roti + Chawal ₹50",
       Dinner: "Malka Daal + 4 Roti + Chawal + Sabji ₹50"
     },
     Saturday: {
-      Breakfast: "Chhole + Kulche + Chai ₹40",
+      Breakfast: "5 Paratha+ Dry Vegetable Curry ₹40",
       Lunch: "Lauki Chana Daal + 4 Roti + Achar ₹50",
       Dinner: "Aloo Tamatar + 4 Roti + Chawal + Raita ₹50"
     },
     Sunday: {
-      Breakfast: "Kachauri + Chai ₹40",
+      Breakfast: "5 Paratha+ Dry Vegetable Curry",
       Lunch: "Veg pulao + dahi + Salad ₹50",
       Dinner: "Paneer + 4 Roti + Chawal + Raita ₹60"
     }
@@ -254,14 +636,14 @@ function toggleSidebar() {
 
   if (todayMenu) {
     menuList.innerHTML = `
-      <li><strong>Breakfast:</strong> ${todayMenu.Breakfast}</li>
-      <li><strong>Lunch:</strong> ${todayMenu.Lunch}</li>
-      <li><strong>Dinner:</strong> ${todayMenu.Dinner}</li>
+      <li><strong>🌅 Breakfast:</strong> ${todayMenu.Breakfast}</li>
+      <li><strong>🌞 Lunch:</strong> ${todayMenu.Lunch}</li>
+      <li><strong>🌙 Dinner:</strong> ${todayMenu.Dinner}</li>
     `;
   } else {
-    menuList.innerHTML = "<li>No menu available today.</li>";
+    menuList.innerHTML = "<li>No menu available today. Please check back tomorrow!</li>";
   }
 </script>
 
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9690adbc33c5963c',t:'MTc1NDE3MDI1MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
