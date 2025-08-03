@@ -82,7 +82,7 @@
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <span class="text-3xl">🍽</span>
+                    <span class="text-3xl">🍽️</span>
                     <h1 class="text-2xl font-bold text-gray-800">Shuprama Kitchen</h1>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -101,7 +101,7 @@
         <!-- Header -->
         <div class="text-center mb-12 slide-up">
             <h1 class="text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                🍽 Shuprama Tiffin Services- Monthly Plans
+                🍽️ Shuprama Kitchen Tiffin Services
             </h1>
             <p class="text-xl text-white opacity-90 drop-shadow">Ghar jaisa khana, restaurant jaisi quality!</p>
             <div class="mt-4 bg-red-600 text-white px-6 py-2 rounded-full inline-block pulse-animation">
@@ -321,7 +321,7 @@
             
             if (planNameElement && planPriceElement) {
                 planNameElement.textContent = planName;
-                planPriceElement.textContent = ₹${price}/month;
+                planPriceElement.textContent = `₹${price}/month`;
             }
             
             // Lock body scroll
@@ -350,6 +350,9 @@
                 setTimeout(() => {
                     subscriptionForm.classList.add('hidden');
                     subscriptionForm.classList.remove('show');
+                    // Reset form data to allow reselection
+                    selectedPlanData = {};
+                    document.getElementById('detailsForm').reset();
                 }, 300);
             }
         }
@@ -363,7 +366,7 @@
             const amount = selectedPlanData.price;
             const upiId = 'prateekshukla481@okaxis';
             const merchantName = 'Shuprama Kitchen';
-            const note = Payment for ${selectedPlanData.name} - Monthly Subscription;
+            const note = `Payment for ${selectedPlanData.name} - Monthly Subscription`;
             
             // Show payment options modal
             showPaymentOptions(amount, upiId, merchantName, note);
@@ -392,7 +395,7 @@
                         
                         <button onclick="showManualPayment('${amount}', '${upiId}')" 
                                 class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl">
-                            ✍ Manual Payment
+                            ✍️ Manual Payment
                         </button>
                     </div>
                 </div>
@@ -405,14 +408,14 @@
 
         function payViaUPI(amount, upiId, merchantName, note) {
             // Create UPI payment URL
-            const upiUrl = upi://pay?pa=${upiId}&pn=${decodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${decodeURIComponent(note)};
+            const upiUrl = `upi://pay?pa=${upiId}&pn=${decodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${decodeURIComponent(note)}`;
             
             try {
                 window.location.href = upiUrl;
                 closeMessage();
                 
                 setTimeout(() => {
-                    showMessage('success', 💳 UPI Payment Initiated!\n\nAmount: ₹${amount}\nUPI ID: ${upiId}\n\nComplete the payment in your UPI app and fill the form below to confirm your subscription.);
+                    showMessage('success', `💳 UPI Payment Initiated!\n\nAmount: ₹${amount}\nUPI ID: ${upiId}\n\nComplete the payment in your UPI app and fill the form below to confirm your subscription.`);
                 }, 1000);
             } catch (error) {
                 showMessage('error', '❌ Unable to open UPI app. Please try QR code or manual payment option.');
@@ -421,8 +424,8 @@
 
         function showQRCode(amount, upiId, merchantName, note) {
             // Generate QR code URL using Google Charts API
-            const qrData = upi://pay?pa=${upiId}&pn=${decodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${decodeURIComponent(note)};
-            const qrCodeUrl = https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrData)};
+            const qrData = `upi://pay?pa=${upiId}&pn=${decodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${decodeURIComponent(note)}`;
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrData)}`;
             
             const qrCodeHtml = `
                 <div class="text-center">
@@ -461,7 +464,7 @@
         function showManualPayment(amount, upiId) {
             const manualPaymentHtml = `
                 <div class="text-center">
-                    <div class="text-4xl mb-4">✍</div>
+                    <div class="text-4xl mb-4">✍️</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Manual UPI Payment</h3>
                     
                     <div class="bg-blue-50 p-4 rounded-xl mb-4 text-left">
@@ -497,7 +500,7 @@
                     
                     <div class="bg-yellow-50 p-3 rounded-lg mb-4">
                         <p class="text-xs text-gray-600">
-                            <strong>⚠ Important:</strong> For amounts above ₹2000, some UPI apps may require additional verification. If you face any issues, please contact us at 6387158928.
+                            <strong>⚠️ Important:</strong> For amounts above ₹2000, some UPI apps may require additional verification. If you face any issues, please contact us at 6387158928.
                         </p>
                     </div>
                 </div>
@@ -532,11 +535,12 @@
             // Simulate successful subscription
             closeForm();
             setTimeout(() => {
-                showMessage('success', 🎉 Subscription Successful!\n\nThank you ${name}!\n\nYour ${selectedPlanData.name} plan is now active.\n\nWe'll start delivering fresh meals from tomorrow.\n\nFor any queries, call: 6387158928);
+                showMessage('success', `🎉 Subscription Successful!\n\nThank you ${name}!\n\nYour ${selectedPlanData.name} plan is now active.\n\nWe'll start delivering fresh meals from tomorrow.\n\nFor any queries, call: 6387158928`);
+                
+                // Reset everything for new subscription
+                selectedPlanData = {};
+                document.getElementById('detailsForm').reset();
             }, 400);
-            
-            // Reset form
-            document.getElementById('detailsForm').reset();
         });
 
         function showMessage(type, message) {
@@ -559,7 +563,7 @@
                 `;
             } else {
                 messageContent.innerHTML = `
-                    <div class="text-blue-600 text-6xl mb-4">ℹ</div>
+                    <div class="text-blue-600 text-6xl mb-4">ℹ️</div>
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Information</h3>
                     <p class="text-gray-700 whitespace-pre-line">${message}</p>
                 `;
@@ -572,6 +576,9 @@
             // Unlock body scroll
             document.body.style.overflow = 'auto';
             document.getElementById('messageModal').classList.add('hidden');
+            
+            // Clear message content to prevent interference
+            document.getElementById('messageContent').innerHTML = '';
         }
 
         // Initialize page
@@ -632,5 +639,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96917be814c091cd',t:'MTc1NDE3ODY5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'969186b42433442a',t:'MTc1NDE3OTEzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
