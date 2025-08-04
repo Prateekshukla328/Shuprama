@@ -181,6 +181,11 @@
                         <span>🏠</span>
                         <span>Go Back Home</span>
                     </button>
+                    <button onclick="goToDashboard()" class="back-button text-white px-6 py-3 rounded-full font-semibold flex items-center space-x-2">
+    <span>📊</span>
+    <span>Go to Dashboard</span>
+</button>
+
                 </div>
             </div>
         </div>
@@ -321,20 +326,23 @@
     </div>
 
     <script>
-        function goHome() {
-            // Create a smooth transition effect
-            document.body.style.transition = 'opacity 0.5s ease-out';
-            document.body.style.opacity = '0';
-            
-            setTimeout(() => {
-                // In a real application, this would navigate to the home page
-                // For demo purposes, we'll show a message
-                alert('🏠 Redirecting to Shuprama Kitchen Home Page...\n\nThank you for reading our message!\n\nWe look forward to serving you delicious, homely meals.');
-                
-                // Reset opacity
-                document.body.style.opacity = '1';
-            }, 500);
-        }
+        function fadeAndRedirect(url) {
+    document.body.style.transition = 'opacity 0.5s ease-out';
+    document.body.style.opacity = '0';
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 500);
+}
+
+function goHome() {
+    fadeAndRedirect('index.html');
+}
+
+function goToDashboard() {
+    fadeAndRedirect('dashboard.html');
+}
+
 
         // Enhanced scroll animations
         document.addEventListener('DOMContentLoaded', function() {
