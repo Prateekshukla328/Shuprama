@@ -509,9 +509,24 @@
             document.getElementById('messageContent').innerHTML = manualPaymentHtml;
         }
 
-        function goHome() {
-            showMessage('info', '🏠 Welcome to Shuprama Kitchen Home Page!\n\nExplore our delicious tiffin services and place your order today!');
-        }
+    <script>
+    function fadeAndRedirect(url) {
+        document.body.style.transition = 'opacity 0.5s ease-out';
+        document.body.style.opacity = '0';
+
+        setTimeout(() => {
+            window.location.href = url;
+        }, 500);
+    }
+
+    function goHome() {
+        fadeAndRedirect('index.html');
+    }
+
+    function goToDashboard() {
+        fadeAndRedirect('dashboard.html');
+    }
+</script>
 
         // Form submission handler
         document.getElementById('detailsForm').addEventListener('submit', function(e) {
