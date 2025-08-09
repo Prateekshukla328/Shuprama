@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuprama Kitchen - Custom Food Orders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dc2626, #ef4444, #fbbf24, #f59e0b, #dc2626);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #dc2626;
+        }
+        
+        .hero {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #dc2626;
+            outline: none;
+        }
+        
+        .food-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .food-item {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .food-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .food-emoji {
+            font-size: 24px;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quantity-btn {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .quantity-btn.minus {
+            background: #dc2626;
+        }
+        
+        .quantity-btn.plus {
+            background: #16a34a;
+        }
+        
+        .quantity-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .quantity {
+            font-size: 18px;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #dc2626, #fbbf24);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .order-summary {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #dc2626;
+            text-align: right;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .success-icon {
+            font-size: 60px;
+            color: #16a34a;
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .food-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="logo">
+                <span style="font-size: 30px;">🍽️</span>
+                <div>
+                    <h1>Shuprama Kitchen</h1>
+                    <p style="font-size: 12px; color: #666;">Ghar Jaisa Khana</p>
+                </div>
+            </div>
+            <a href="tel:6387158928" style="background: #dc2626; color: white; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: bold;">📞 Call Now</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>🍛 Custom Food Orders</h1>
+            <p>Order exactly what you want, when you want it!</p>
+            <div style="background: #fbbf24; color: #dc2626; padding: 10px 20px; border-radius: 25px; display: inline-block; font-weight: bold;">
+                ⚡ Instant Processing Available - Just ₹20 Extra!
+            </div>
+        </div>
+
+        <!-- Order Form -->
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #333;">🍽️ Create Your Perfect Meal</h2>
+            
+            <form id="orderForm">
+                <!-- Customer Details -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="customerName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number *</label>
+                        <input type="tel" id="customerMobile" required placeholder="10-digit mobile number">
+                    </div>
+                </div>
+
+                <!-- Food Items -->
+                <h3 style="margin-bottom: 15px;">🍛 Select Your Items</h3>
+                <div class="food-items">
+                    <div class="food-item">
+                        <div class="food-info">
+                            <span class="food-emoji">🍚</span>
+                            <div>
+                                <strong>Rice</strong>
+                                <div style="font-size: 12px; color: #666;">Basmati rice - ₹30</div>
+                            </div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn minus" onclick="changeQuantity('rice', -1)">-</button>
+                            <span class="quantity" id="rice-qty">0</span>
+                            <button type="button" class="quantity-btn plus" onclick="changeQuantity('rice', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-info">
+                            <span class="food-emoji">🫓</span>
+                            <div>
+                                <strong>Roti/Chapati</strong>
+                                <div style="font-size: 12px; color: #666;">Fresh wheat roti - ₹8</div>
+                            </div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn minus" onclick="changeQuantity('roti', -1)">-</button>
+                            <span class="quantity" id="roti-qty">0</span>
+                            <button type="button" class="quantity-btn plus" onclick="changeQuantity('roti', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-info">
+                            <span class="food-emoji">🍲</span>
+                            <div>
+                                <strong>Dal</strong>
+                                <div style="font-size: 12px; color: #666;">Yellow/Mixed dal - ₹25</div>
+                            </div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn minus" onclick="changeQuantity('dal', -1)">-</button>
+                            <span class="quantity" id="dal-qty">0</span>
+                            <button type="button" class="quantity-btn plus" onclick="changeQuantity('dal', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-info">
+                            <span class="food-emoji">🥬</span>
+                            <div>
+                                <strong>Sabzi</strong>
+                                <div style="font-size: 12px; color: #666;">Seasonal vegetables - ₹35</div>
+                            </div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn minus" onclick="changeQuantity('sabzi', -1)">-</button>
+                            <span class="quantity" id="sabzi-qty">0</span>
+                            <button type="button" class="quantity-btn plus" onclick="changeQuantity('sabzi', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-info">
+                            <span class="food-emoji">🥒</span>
+                            <div>
+                                <strong>Pickle</strong>
+                                <div style="font-size: 12px; color: #666;">Homemade achaar - ₹5</div>
+                            </div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn minus" onclick="changeQuantity('pickle', -1)">-</button>
+                            <span class="quantity" id="pickle-qty">0</span>
+                            <button type="button" class="quantity-btn plus" onclick="changeQuantity('pickle', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="food-item">
+                        <div class="food-info">
+                            <span class="food-emoji">🥗</span>
+                            <div>
+                                <strong>Salad</strong>
+                                <div style="font-size: 12px; color: #666;">Fresh mixed salad - ₹15</div>
+                            </div>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn minus" onclick="changeQuantity('salad', -1)">-</button>
+                            <span class="quantity" id="salad-qty">0</span>
+                            <button type="button" class="quantity-btn plus" onclick="changeQuantity('salad', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Time -->
+                <div class="form-group">
+                    <label>Preferred Delivery Time</label>
+                    <select id="deliveryTime">
+                        <option value="breakfast">🌅 Breakfast (8:00-10:00 AM)</option>
+                        <option value="lunch" selected>🌞 Lunch (12:00-2:00 PM)</option>
+                        <option value="evening">🌆 Evening (5:00-7:00 PM)</option>
+                        <option value="dinner">🌙 Dinner (7:00-9:00 PM)</option>
+                    </select>
+                </div>
+
+                <!-- Instant Processing -->
+                <div style="background: #fef3c7; border: 2px solid #fcd34d; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="instantProcessing" onchange="updateTotal()">
+                        <div>
+                            <strong>⚡ Instant Processing (+₹20)</strong>
+                            <div style="font-size: 14px; color: #666;">Get your order prepared and delivered within 1 hour!</div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label>Delivery Address *</label>
+                    <textarea id="deliveryAddress" required rows="3" placeholder="Enter your complete delivery address with landmark"></textarea>
+                </div>
+
+                <!-- Special Instructions -->
+                <div class="form-group">
+                    <label>Special Instructions (Optional)</label>
+                    <textarea id="specialInstructions" rows="2" placeholder="Any special requests or dietary requirements..."></textarea>
+                </div>
+
+                <!-- Order Summary -->
+                <div id="orderSummary" class="order-summary">
+                    <h4 style="margin-bottom: 10px;">📋 Order Summary</h4>
+                    <div id="summaryItems" style="margin-bottom: 10px;"></div>
+                    <div class="total">Total Amount: ₹<span id="totalAmount">0</span></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">🛒 Place Order Now</button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="form-container" style="text-align: center;">
+            <span style="font-size: 60px; display: block; margin-bottom: 20px;">🍽️</span>
+            <h2 style="color: #333; margin-bottom: 10px;">Shuprama Kitchen</h2>
+            <p style="color: #666; margin-bottom: 20px;">"Ghar Jaisa Khana, Restaurant Jaisi Quality"</p>
+            
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <a href="tel:6387158928" style="color: #2563eb; text-decoration: none; font-weight: bold;">📞 6387158928</a>
+                <a href="https://wa.me/916387158928" target="_blank" style="color: #16a34a; text-decoration: none; font-weight: bold;">💬 WhatsApp</a>
+                <a href="https://instagram.com/shupramakitchen" target="_blank" style="color: #dc2626; text-decoration: none; font-weight: bold;">📷 @shupramakitchen</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h3>Order Sent to WhatsApp!</h3>
+            <div id="orderDetails" style="background: #f3f4f6; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: left;"></div>
+            <p>Your order has been sent to Shuprama Kitchen via WhatsApp. We'll confirm your order shortly!</p>
+            <p style="color: #16a34a; font-weight: bold;">💬 WhatsApp will open automatically to send your order details.</p>
+            <button class="close-btn" onclick="closeModal()">Great! 🎉</button>
+        </div>
+    </div>
+
+    <script>
+        // Food quantities and prices
+        const quantities = {
+            rice: 0, roti: 0, dal: 0, sabzi: 0, pickle: 0, salad: 0
+        };
+        
+        const prices = {
+            rice: 30, roti: 8, dal: 25, sabzi: 35, pickle: 5, salad: 15
+        };
+
+        function changeQuantity(item, change) {
+            quantities[item] = Math.max(0, quantities[item] + change);
+            document.getElementById(item + '-qty').textContent = quantities[item];
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let total = 0;
+            let itemsText = '';
+            let hasItems = false;
+            
+            for (const [item, qty] of Object.entries(quantities)) {
+                if (qty > 0) {
+                    hasItems = true;
+                    const itemTotal = qty * prices[item];
+                    total += itemTotal;
+                    itemsText += item.charAt(0).toUpperCase() + item.slice(1) + ': ' + qty + ' × ₹' + prices[item] + ' = ₹' + itemTotal + '<br>';
+                }
+            }
+            
+            // Add instant processing fee
+            if (document.getElementById('instantProcessing').checked && hasItems) {
+                total += 20;
+                itemsText += 'Instant Processing: ₹20<br>';
+            }
+            
+            if (hasItems) {
+                document.getElementById('summaryItems').innerHTML = itemsText;
+                document.getElementById('totalAmount').textContent = total;
+                document.getElementById('orderSummary').style.display = 'block';
+            } else {
+                document.getElementById('orderSummary').style.display = 'none';
+            }
+        }
+
+        // Form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('customerName').value.trim();
+            const mobile = document.getElementById('customerMobile').value.trim();
+            const address = document.getElementById('deliveryAddress').value.trim();
+            const specialInstructions = document.getElementById('specialInstructions').value.trim();
+            
+            if (!name || !mobile || !address) {
+                alert('❌ Please fill all required fields!');
+                return;
+            }
+            
+            if (!/^[0-9]{10}$/.test(mobile)) {
+                alert('❌ Please enter a valid 10-digit mobile number!');
+                return;
+            }
+            
+            const hasItems = Object.values(quantities).some(qty => qty > 0);
+            if (!hasItems) {
+                alert('❌ Please select at least one food item!');
+                return;
+            }
+            
+            // Calculate total and create order summary
+            let total = 0;
+            let orderItems = [];
+            let orderDetails = '';
+            
+            for (const [item, qty] of Object.entries(quantities)) {
+                if (qty > 0) {
+                    const itemTotal = qty * prices[item];
+                    total += itemTotal;
+                    orderItems.push(item.charAt(0).toUpperCase() + item.slice(1) + ': ' + qty + ' (₹' + itemTotal + ')');
+                }
+            }
+            
+            const instantProcessing = document.getElementById('instantProcessing').checked;
+            if (instantProcessing) {
+                total += 20;
+                orderItems.push('Instant Processing: ₹20');
+            }
+            
+            const deliveryTime = document.getElementById('deliveryTime').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = 
+                `🍽️ *NEW ORDER - SHUPRAMA KITCHEN* 🍽️\n\n` +
+                `👤 *Customer Details:*\n` +
+                `Name: ${name}\n` +
+                `Mobile: ${mobile}\n\n` +
+                `🍛 *Order Items:*\n` +
+                `${orderItems.join('\n')}\n\n` +
+                `⏰ *Delivery Time:* ${deliveryTime.charAt(0).toUpperCase() + deliveryTime.slice(1)}\n` +
+                `${instantProcessing ? '⚡ *INSTANT PROCESSING REQUESTED*\n' : ''}` +
+                `💰 *Total Amount: ₹${total}*\n\n` +
+                `📍 *Delivery Address:*\n${address}\n\n` +
+                `${specialInstructions ? `📝 *Special Instructions:*\n${specialInstructions}\n\n` : ''}` +
+                `🕐 *Order Time:* ${new Date().toLocaleString('en-IN')}\n\n` +
+                `Please confirm this order! 🙏`;
+            
+            // Send to WhatsApp
+            const whatsappURL = `https://wa.me/916387158928?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            // Show success modal first
+            const orderDetailsDiv = document.getElementById('orderDetails');
+            orderDetailsDiv.innerHTML = 
+                '<strong>Customer:</strong> ' + name + '<br>' +
+                '<strong>Mobile:</strong> ' + mobile + '<br>' +
+                '<strong>Items:</strong> ' + orderItems.join(', ') + '<br>' +
+                '<strong>Delivery Time:</strong> ' + deliveryTime + '<br>' +
+                '<strong>Total Amount:</strong> ₹' + total + '<br>' +
+                '<strong>Address:</strong> ' + address;
+            
+            document.getElementById('successModal').style.display = 'block';
+            
+            // Open WhatsApp after a short delay
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+            }, 1000);
+            
+            // Reset form
+            this.reset();
+            Object.keys(quantities).forEach(key => {
+                quantities[key] = 0;
+                document.getElementById(key + '-qty').textContent = '0';
+            });
+            document.getElementById('orderSummary').style.display = 'none';
+        });
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96c6356dd6e0a710',t:'MTc1NDczMTU1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
